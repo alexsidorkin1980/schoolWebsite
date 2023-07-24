@@ -19,8 +19,8 @@ if ($_SESSION['role'] == 'user') {
     exit();
 }
 
-require_once'index.php';
-require_once'connect.php';//пiдключення до бази
+require_once'../index.php';
+require_once'../config/connect.php';//пiдключення до бази
 $db = connectDb($BD);
 $class = isset($_POST['Combobox1']) ? $_POST['Combobox1'] : '';//присвоюемо даннi з форми в змiннi
 $litt = isset($_POST['Combobox2']) ? $_POST['Combobox2'] : ''; 

@@ -13,8 +13,8 @@ if ($_SESSION['role'] == 'librarian') {
 }
 
 
-require_once 'index.php';
-require_once 'connect.php';
+require_once '../index.php';
+require_once '../config/connect.php';
 $look1='';$text='';
 $db = connectDb($BD);//під'єднання до бази
 

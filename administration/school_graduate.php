@@ -19,7 +19,7 @@ if ($_SESSION['role'] == 'user') {
     exit();
 }
 
-require_once 'connect.php';// Пiдключення до бази
+require_once '../config/connect.php';// Пiдключення до бази
 $db = connectDb($BD);
 $sql = "SELECT * FROM `classes`";
 $result = mysqli_query($db, $sql);
@@ -37,7 +37,7 @@ $result = mysqli_query($db, $sql);
        //classes поле graduate не null
       $sql3 = "UPDATE `schoolboys` SET graduate = NOW() WHERE id_classes IN (SELECT id FROM `classes` WHERE graduate IS NOT NULL)";
     mysqli_query($db, $sql3);
-     header('Location: index.php');
+     header('Location: ../index.php');
      exit();
   }
 ?>

@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pass=md5($pass."qsrtuh319876");
-require_once'connect.php';
+require_once'../config/connect.php';
 $db = connectDb($BD);
 //запит на додавання даних логiна i паролю в базу
 if (!empty($login) && !empty($pass)) {
@@ -33,8 +33,8 @@ if (!empty($login) && !empty($pass)) {
 <meta charset="utf-8">
 <title>Форма регистрации</title>
 <meta name="generator" content="WYSIWYG Web Builder 15 - http://www.wysiwygwebbuilder.com">
-<link href="css/Мододша_школа.css" rel="stylesheet">
-<link href="css/login.css" rel="stylesheet">
+<link href="../css/Мододша_школа.css" rel="stylesheet">
+<link href="../css/login.css" rel="stylesheet">
 </head>
 <body>
 <div id="wb_Login1" style="position:absolute;left:375px;top:139px;width:220px;height:214px;z-index:0;">
@@ -71,7 +71,7 @@ if (!empty($login) && !empty($pass)) {
 </tr>
 </table>
 </form>
-<p> <a href="index.php" style='color:red;'>повернутися на головну</a> </p>
+<p> <a href="../index.php" style='color:red;'>повернутися на головну</a> </p>
 </div>
 <div><span style='color:red;'><?php echo$text;?></span></div>
 </body>

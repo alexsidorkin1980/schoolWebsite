@@ -38,7 +38,7 @@ else {
 if(isset($_GET['coock'])&&$_GET['coock']=='update'){
    setcookie('user', '', time() - 3600, '/');
    unset($_SESSION['role']);
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit(); 
 }
 ?>
@@ -50,8 +50,8 @@ if(isset($_GET['coock'])&&$_GET['coock']=='update'){
 <meta charset="utf-8">
 <title>Безымянная страница</title>
 <meta name="generator" content="WYSIWYG Web Builder 15 - http://www.wysiwygwebbuilder.com">
-<link href="css/Мододша_школа.css" rel="stylesheet">
-<link href="css/login.css" rel="stylesheet">
+<link href="../css/Мододша_школа.css" rel="stylesheet">
+<link href="../css/login.css" rel="stylesheet">
 </head>
 <body>
 <div id="wb_Login1" style="position:absolute;left:375px;top:139px;width:220px;height:214px;z-index:0;">
@@ -84,7 +84,7 @@ if(isset($_GET['coock'])&&$_GET['coock']=='update'){
 </form>
 
 
-<p> <a href="index.php" style="color:red;">повернутися на головну</a> </p>
+<p> <a href="/public/index.php" style="color:red;">повернутися на головну</a> </p>
 </div>
 
 <h4 style="color:blue;position:absolute;left:341px;top:66px;"><?=$text;?></h4>

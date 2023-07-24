@@ -11,7 +11,7 @@ if ($_SESSION['role'] == 'user') {
   echo'доступ закрыт';
   exit();
 }
-require_once 'connect.php';
+require_once '../config/connect.php';
 //получаемо iнв.номер 
 if (isset($_GET['inv_number'])) {
   $inv = $_GET['inv_number'];

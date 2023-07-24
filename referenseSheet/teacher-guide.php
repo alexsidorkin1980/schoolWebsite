@@ -17,7 +17,7 @@ if ($_SESSION['role'] == 'user') {
   exit();
 }
 
-require_once'index.php';
+require_once '../index.php';
 ?>
 <div id="wb_Form1" style="position:absolute;left:100px;top:119px;width:733px;height:447px;z-index:13;">
 <form name="Form1" method="post" action="" enctype="multipart/form-data" id="Form1">
@@ -35,7 +35,8 @@ require_once'index.php';
 </tr>
 
 <?php
-require_once 'connect.php';// пiдключення до бази
+
+require_once '../config/connect.php';// пiдключення до бази
 $db = connectDb($BD);
 $text='';//для виводу тексту
 $sql = "SELECT * FROM `classes` WHERE `graduate` IS NULL ORDER BY `class` ASC";

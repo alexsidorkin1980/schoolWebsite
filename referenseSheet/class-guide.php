@@ -14,8 +14,8 @@ if ($_SESSION['role'] == 'librarian') {
     exit();
 }
 
-require_once'index.php';
-require_once'connect.php';
+require_once'../index.php';
+require_once'../config/connect.php';
 $look1='';
 $db = connectDb($BD);//під'єднання до бази
 

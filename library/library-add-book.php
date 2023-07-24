@@ -14,8 +14,8 @@ if ($_SESSION['role'] == 'user') {
     echo'доступ закрыт';
     exit();
 }
-require_once'index.php';
-require_once'connect.php';// Пiдключення до бази
+require_once'../index.php';
+require_once'../config/connect.php';// Пiдключення до бази
 $text='';
 $db = connectDb($BD);
 $name = isset($_POST['Editbox1']) ? $_POST['Editbox1'] : '';

@@ -10,7 +10,7 @@ if ($_SESSION['role'] == 'user') {
   echo'доступ закрыт';
   exit();
 }
-require_once'index.php';
+require_once'../index.php';
 ?>
 <pre>
   
@@ -37,7 +37,7 @@ style="color:#000000;">інв. номер</span></p></td>
 </tr>
 
 <?php
-require_once 'connect.php';
+require_once '../config/connect.php';
 $db = connectDb($BD);
 $sql = "SELECT * FROM `library` ";
 $result = mysqli_query($db, $sql);

@@ -20,8 +20,8 @@ if ($_SESSION['role'] == 'user') {
     exit();
 }
 
-require_once'index.php';
-require_once'connect.php';//пiдключення до бази
+require_once'../index.php';
+require_once'../config/connect.php';//пiдключення до бази
 $db = connectDb($BD);
 $pip = isset($_POST['Editbox1']) ? $_POST['Editbox1'] : '';//присвоюемо даннi з форми в змiннi
 $dn = isset($_POST['Editbox2']) ? $_POST['Editbox2'] : ''; 
