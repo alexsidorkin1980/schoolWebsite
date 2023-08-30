@@ -21,7 +21,7 @@ if (!empty($login) && !empty($pass)) {
 
        if ($_SESSION['role'] == 'admin'||$_SESSION['role'] == 'librarian'
        ||$_SESSION['role'] == 'user') {
-           header('Location: index.php');
+           header('Location: ../index.php');
            exit();
        } else {
        // Неверный логин или пароль
@@ -84,7 +84,7 @@ if(isset($_GET['coock'])&&$_GET['coock']=='update'){
 </form>
 
 
-<p> <a href="/public/index.php" style="color:red;">повернутися на головну</a> </p>
+<p> <a href="/index.php" style="color:red;">повернутися на головну</a> </p>
 </div>
 
 <h4 style="color:blue;position:absolute;left:341px;top:66px;"><?=$text;?></h4>

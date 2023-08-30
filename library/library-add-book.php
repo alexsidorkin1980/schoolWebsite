@@ -26,17 +26,19 @@ if ( !empty($name) && !empty($date_edition)&& !empty($number)) {
     if (empty($number_end)) {
       $number_end = $number;
   }
-    for($i=$number;$i<=$number_end ;$i++){
+    for($i=$number;$i<=$number_end ;$i++){// цикл для додавання декiлька книг
       try {
-    $sql = "INSERT INTO `library` (`id`, `name_book`, `date_edition`, `inv_number`) 
-    VALUES (NULL, '$name', '$date_edition', '$i')";
-    
+    $sql = "INSERT INTO `library` (`id`, `inv_number`, `name_book`, `date_edition`, `borrow_date`,
+     `return_date`, `id_teachers`, `id_schoolboys`) VALUES (NULL, '$i', '$name', '$date_edition', NULL,
+      NULL, NULL, NULL)";
+
     mysqli_query($db, $sql);
+
   } catch (mysqli_sql_exception $e) {
     // Перевiрка на помилку дублювання запису
     if (strpos($e->getMessage(), "Duplicate entry") !== false) {
       $text= "Книга з таким iнв. номером вже знаходиться в бiблiотецi!!! ";
-    break;
+     break;
     }
 }
 $text= "Книга успiшно додана в бiблiотеку!!! ";

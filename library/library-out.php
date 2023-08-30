@@ -14,7 +14,6 @@ if ($_SESSION['role'] == 'user') {
 }
 
 require_once '../index.php';
-
 require_once '../config/connect.php';
 $text='';$text1='';
 $db = connectDb($BD); // подключение к базе данных

@@ -3,7 +3,8 @@ session_start();
 
 // Перевiрка наявностi ролi в сесii
 if (!isset($_SESSION['role'])) {
-    header('Location: login.php');
+    header('Location: ..\config\login.php');
+    // include '..\config\login.php';
     exit();
 }
 
@@ -18,9 +19,8 @@ if ($_SESSION['role'] == 'user') {
     echo'доступ закрыт';
     exit();
 }
-
-require_once'../index.php';
-require_once'../config/connect.php';//пiдключення до бази
+require_once '../index.php';
+require_once '../config/connect.php';//пiдключення до бази
 $db = connectDb($BD);
 $class = isset($_POST['Combobox1']) ? $_POST['Combobox1'] : '';//присвоюемо даннi з форми в змiннi
 $litt = isset($_POST['Combobox2']) ? $_POST['Combobox2'] : ''; 
@@ -28,7 +28,7 @@ $boss = isset($_POST['Editbox1']) ? $_POST['Editbox1'] : '';
 $text='';
 
 if (!empty($boss) ) {//додаемо вчителя до таблицi teachers
-   $sql = "INSERT INTO `teachers` (`id`, `pip`) VALUES (NULL, '$boss')";
+   $sql = "INSERT INTO `teachers` (`id`, `pip`,`class_id`) VALUES (NULL, '$boss', NULL)";
    mysqli_query($db, $sql);
   
 }
