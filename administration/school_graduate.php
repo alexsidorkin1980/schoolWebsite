@@ -20,9 +20,11 @@ if ($_SESSION['role'] == 'user') {
 }
 
 require_once '../config/connect.php';// Пiдключення до бази
-$db = connectDb($BD);
+// $db = connectDb($BD);
 $sql = "SELECT * FROM `classes`";
-$result = mysqli_query($db, $sql);
+// $result = mysqli_query($db, $sql);
+
+
 
   if (isset($_GET['action']) && $_GET['action'] == 'update') {
       // Виконати змiни в базi даних

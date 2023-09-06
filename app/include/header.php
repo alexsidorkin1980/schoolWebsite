@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 <head>
@@ -121,4 +120,3 @@ cmDrawFromText('MenuBar1', 'hbr', cmMenuBar1, 'MenuBar1');
 
 </body>
 </html>
-

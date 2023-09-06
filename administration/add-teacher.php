@@ -3,7 +3,7 @@ session_start();
 
 // Перевiрка наявностi ролi в сесii
 if (!isset($_SESSION['role'])) {
-    header('Location: ..\config\login.php');
+    header('Location:login.php');
     // include '..\config\login.php';
     exit();
 }
@@ -20,33 +20,46 @@ if ($_SESSION['role'] == 'user') {
     exit();
 }
 require_once '../index.php';
-require_once '../config/connect.php';//пiдключення до бази
-$db = connectDb($BD);
+require_once '../app/database/connect.php';//пiдключення до бази
+ require_once '../app/database/db.php';//пiдключення до бази
+
 $class = isset($_POST['Combobox1']) ? $_POST['Combobox1'] : '';//присвоюемо даннi з форми в змiннi
 $litt = isset($_POST['Combobox2']) ? $_POST['Combobox2'] : ''; 
 $boss = isset($_POST['Editbox1']) ? $_POST['Editbox1'] : '';
 $text='';
 
+$post=[
+    
+    'pip'=>$boss,
+   
+
+    ];
+
+     
 if (!empty($boss) ) {//додаемо вчителя до таблицi teachers
-   $sql = "INSERT INTO `teachers` (`id`, `pip`,`class_id`) VALUES (NULL, '$boss', NULL)";
-   mysqli_query($db, $sql);
-  
+insert('teachers',$post);
 }
+    $post1=[
+    
+        'class'=>$class,
+        'lit'=>$litt,
+        ];
 
 if (!empty($class) && !empty($litt)) { 
-    
-    $selectSql = "SELECT * FROM `classes` WHERE `class` = '$class' AND `lit` = '$litt'";
-    $result = mysqli_query($db, $selectSql);
 
-    if ( mysqli_num_rows($result) == 0) {//перевiрка на наявнiсть в таблицi классу та лiтери
-        $insertSql = "INSERT INTO `classes` (`id`, `class`, `lit`) VALUES (NULL, '$class', '$litt')";
-        mysqli_query($db, $insertSql);
+
+    $result=selectAll('classes',$post1);
+
+    if ( count($result) == 0) {//перевiрка на наявнiсть в таблицi классу та лiтери
+        insert('classes',$post1);
+
     } else {
         $text= "Такий клас вже знаходиться в базi!!!!";
     }
 }
 
 ?>
+
 <div id="wb_Form1" style="position:absolute;left:163px;top:127px;width:644px;height:252px;z-index:11;">
 <form name="Form1" method="post" action="" enctype="multipart/form-data" id="Form1">
 <div id="wb_Heading1" style="position:absolute;left:75px;top:12px;width:484px;height:39px;z-index:2;">

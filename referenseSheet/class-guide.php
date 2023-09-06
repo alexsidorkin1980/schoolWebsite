@@ -14,59 +14,100 @@ if ($_SESSION['role'] == 'librarian') {
     exit();
 }
 
-require_once'../index.php';
-require_once'../config/connect.php';
+require_once '../index.php';
+require_once '../app/database/connect.php';
+require_once '../app/database/db.php';
 $look1='';
-$db = connectDb($BD);//під'єднання до бази
+// $db = connectDb($BD);//під'єднання до бази
 
 //рядок з  запитом до бази
 $sql = "SELECT * FROM `classes` WHERE `graduate` IS NULL ORDER BY `classes`.`class` ASC";
-$result = mysqli_query($db, $sql);//виконання запиту до бази
-$s = mysqli_fetch_array($result);//результат виконання запиту повернути до ассаціативного масиву	
+// $result = mysqli_query($db, $sql);//виконання запиту до бази
+// $s = mysqli_fetch_array($result);//результат виконання запиту повернути до ассаціативного масиву	
+$stmt = $pdo->prepare($sql);
+ // Выполнение запроса
+ $stmt->execute();
+ // проверка на ошибки
+ dbCheckError($stmt);
+ // Получение результата
+ $s = $stmt->fetchAll();
+
+
 $look = "
 
 <select name='Combobox1' size='1' id='Combobox1' style='position:absolute;left:446px;top:20px;width:99px;height:28px;z-index:4;'>";//будую шапку комбобоксу
 
 //перебираю отриманий масив
-do
-	{		
+// do
+// 	{		
+        foreach ($s as $item) {
+            $id = $item['id'];
+            $class = $item['class'];
+            $lit = $item['lit'];
+            $graduate = $item['graduate'];	
         //з кожного запису масиву будую рядок мого комбобоксу   
-      if (isset($_POST['Combobox1']) and $_POST['Combobox1'] == $s['id'])
-      $look = $look."<option selected value='".$s['id']."'>".$s['class']."-".$s['lit']."</option>"; 
+      if (isset($_POST['Combobox1']) and $_POST['Combobox1'] == $id)
+      $look = $look."<option selected value='".$id."'>".$class."-".$lit."</option>"; 
    else 
-   $look = $look."<option value='".$s['id']."'>".$s['class']."-".$s['lit']."</option>";        
+   $look = $look."<option value='".$id."'>".$class."-".$lit."</option>";        
 
 	}
-while ($s=mysqli_fetch_array($result));	
+// while ($s=mysqli_fetch_array($result));	
 
 //додаю закінчення комбобоксу 
 
 $look = $look."</select>";
+
+
    if (isset($_POST['Combobox1']))
       {
          //рядок з  запитом до бази учитель класса
          $sql = "SELECT * FROM `teachers` WHERE `class_id` = ".$_POST['Combobox1'];
        
-         $result = mysqli_query($db, $sql);//виконання запиту до бази
-         $s = mysqli_fetch_array($result);//результат виконання запиту повернути до ассаціативного масиву
+        //  $result = mysqli_query($db, $sql);//виконання запиту до бази
+        //  $s = mysqli_fetch_array($result);//результат виконання запиту повернути до ассаціативного масиву
+        $stmt = $pdo->prepare($sql);
+        // Выполнение запроса
+        $stmt->execute();
+        // проверка на ошибки
+        dbCheckError($stmt);
+        // Получение результата
+        $st = $stmt->fetchAll();
+       
+
+
        $sql_boy = "SELECT * FROM `schoolboys` WHERE `id_classes` = ".$_POST['Combobox1'];
        
-       $result_boy = mysqli_query($db, $sql_boy);//виконання запиту до бази
-      $sb = mysqli_fetch_all($result_boy);//результат виконання запиту повернути до ассаціативного масиву
-      
+    //    $result_boy = mysqli_query($db, $sql_boy);//виконання запиту до бази
+    //   $sb = mysqli_fetch_all($result_boy);//результат виконання запиту повернути до ассаціативного масиву
+    $stmt = $pdo->prepare($sql);
+    // Выполнение запроса
+    $stmt->execute();
+    // проверка на ошибки
+    dbCheckError($stmt);
+    // Получение результата
+    $sb = $stmt->fetchAll();
+   
            $n=1;
            
      
-      foreach($sb as $b)
-	{	
+    //   foreach($sb as $b)
+	// {	
+
+        foreach ($sp as $item) {
+            $id = $item['id'];
+            $pip = $item['pip'];
+            $dn=$item['dn'];
+            $class_id = $item['id_classes'];
+            $graduate = $item['graduate'];	
       $look1.="
       <tr>
       <td class='cell0'><p style='font-size:13px;line-height:16px;color:#000000;'>
       <span style='color:#000000;'>&nbsp;</span><span style='font-family:Segoe UI Symbol;color:#000000;'>".$n++."</span></p></td>
       <td class='cell1'><p style='font-size:13px;line-height:16px;color:#000000;'>
-      <span style='color:#000000;'>&nbsp;</span><span style='color:#000000;'>".$b[1]."</span></p></td>
+      <span style='color:#000000;'>&nbsp;</span><span style='color:#000000;'>".$pip."</span></p></td>
       <td class='cell2'><p style='font-size:13px;line-height:16px;color:#000000;'>
-      <span style='color:#000000;'>&nbsp;</span><span style='color:#000000;'>".$b[2]."</span></p></td>
+      <span style='color:#000000;'>&nbsp;</span><span style='color:#000000;'>".$dn."</span></p></td>
       </tr>
       ";
       }      
@@ -127,11 +168,19 @@ $look = $look."</select>";
 </tr>
 </table>  
 
-<?php echo $look;?>
+<?php echo $look;
+$teacherRow = $st[0];
+$id = $teacherRow['id'];
+$pip = $teacherRow['pip'];
+$class_id = $teacherRow['class_id'];
+
+
+
+?>
 
 <div id="wb_Text1" style="position:absolute;left:42px;top:78px;width:446px;height:15px;z-index:5;">
-<span style="color:#000000;font-family:Arial;font-size:13px;"> <?php if (isset($s['pip'])) {
-    echo 'Класний керівник: ' . $s['pip'];
+<span style="color:#000000;font-family:Arial;font-size:13px;"> <?php if (isset($pip)) {
+    echo 'Класний керівник: ' . $pip;
 } else {
     echo 'Класний керівник не найден';
 }?></span></div>

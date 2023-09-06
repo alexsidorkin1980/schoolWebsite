@@ -21,37 +21,89 @@ if ($_SESSION['role'] == 'user') {
 }
 
 require_once'../index.php';
-require_once'../config/connect.php';//пiдключення до бази
-$db = connectDb($BD);
+//пiдключення до бази
+require_once '../app/database/db.php';//пiдключення до бази
+require_once '../app/database/connect.php';//пiдключення до бази
+
+//$db = connectDb($BD);
+
+// $db = connectDb($BD);
+
 $pip = isset($_POST['Editbox1']) ? $_POST['Editbox1'] : '';//присвоюемо даннi з форми в змiннi
 $dn = isset($_POST['Editbox2']) ? $_POST['Editbox2'] : ''; 
 $id_classes = isset($_POST['Combobox1']) ? $_POST['Combobox1'] : '';
+
+
 //рядок з  запитом до бази
-$sql = "SELECT * FROM `classes` WHERE `graduate` IS NULL ORDER BY `class` ASC";
-$result = mysqli_query($db, $sql);//виконання запиту до бази
-$s = mysqli_fetch_array($result);//результат виконання запиту повернути до ассаціативного масиву
+ $sql = "SELECT * FROM `classes` WHERE `graduate` IS NULL ORDER BY `class` ASC";
+// Подготовка запроса
+ $stmt = $pdo->prepare($sql);
+
+ // Выполнение запроса
+ $stmt->execute();
+ 
+ // Получение результата
+ $s = $stmt->fetchAll();
+
+//  foreach ($s as $item) {
+//     $id = $item['id'];
+//     $class = $item['class'];
+//     $lit = $item['lit'];
+//     $graduate = $item['graduate'];
+
+//     // Здесь вы можете обрабатывать каждый элемент массива
+// }
+
+ echo '<pre>';
+//  print_r($id);
+
+//  $stmt = $pdo->prepare($sql);
+// $result = mysqli_query($db, $sql);//виконання запиту до бази
+// $s = mysqli_fetch_array($result);//результат виконання запиту повернути до ассаціативного масиву
 	
+
 $look = "
 <select name='Combobox1' size='1' id='Combobox1'
  style='position:absolute;left:177px;top:153px;width:156px;height:28px;z-index:10'>";
 //перебираю отриманий масив
-do
-	{		
+// do
+// 	{		
+        foreach ($s as $item) {
+
+            $id = $item['id'];
+            $class = $item['class'];
+            $lit = $item['lit'];
+            $graduate = $item['graduate'];
+        
         //з кожного запису масиву будую рядок мого комбобоксу
-		if (isset($_POST['Combobox1']) and $_POST['Combobox1'] == $s['id'])
-			$look = $look."<option selected value='".$s['id']."'>".$s['class']."-".$s['lit']."</option>"; 
+		if (isset($_POST['Combobox1']) and $_POST['Combobox1'] == $id )
+			$look = $look."<option selected value='".$id ."'>".$class."-".$lit."</option>"; 
 		else 
-		$look = $look."<option value='".$s['id']."'>".$s['class']."-".$s['lit']."</option>";        
-	}
-while ($s=mysqli_fetch_array($result));	
+		$look = $look."<option value='".$id ."'>".$class."-".$lit."</option>";        
+	} 
+// while ($s=mysqli_fetch_array($result));	
 
 //додаю закінчення комбобоксу 
 $look = $look."</select>";
-// перевiрка на присутнiсть значень в формi
-if (!empty($pip) && !empty($dn) && !empty($id_classes)) {
-   $sql = "INSERT INTO `schoolboys` (`id`, `pip`, `dn`, `id_classes`) VALUES (NULL, '$pip', '$dn', '$id_classes')";
-   mysqli_query($db, $sql);
+
+
+$post=[
+    
+    
+    'pip'=>$pip,
+    'dn'=>$dn,
+    'id_classes'=>$id_classes,
+    
    
+
+    ];
+// перевiрка на присутнiсть значень в формi&& !empty($id_classes)
+if (!empty($pip) && !empty($dn) ) {
+//    $sql = "INSERT INTO `schoolboys` (`id`, `pip`, `dn`, `id_classes`) VALUES (NULL, '$pip', '$dn', '$id_classes')";
+//    mysqli_query($db, $sql);
+   
+      insert('schoolboys',$post);
+
 }
 
 ?>

@@ -1,4 +1,6 @@
 <?php
+
+require_once '';
 $text='';
 $role='';
 $login=isset($_POST['login']) ? $_POST['login'] : '';
