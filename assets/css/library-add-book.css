@@ -1,5 +1,43 @@
 body
 {
+   background-color: #c6d3bf;
+   color: #000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   line-height: 1.1875;
+   margin: 0;
+   padding: 0;
+}
+
+   .form-content {
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      /* margin-left: 120px; */
+    }
+    
+    /* Стили для формы (пример) */
+    form {
+      height: 500px;
+      background-color: #87e687;
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin-left: 250px !important;
+    }
+    form h1{
+text-align: center;
+
+    }
+
+
+
+
+
+/* body
+{
    background-color: #FFFFFF;
    color: #000000;
    font-family: Arial;
@@ -521,4 +559,4 @@ body
    border-color: #66AFE9;
    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
    outline: 0;
-}
+} */

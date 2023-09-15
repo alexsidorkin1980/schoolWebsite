@@ -1,4 +1,55 @@
-#Button1 {
+/* FORMS */
+.reg_form h2{
+   text-align: center;
+   margin: 30px 0;
+
+  }
+
+  .reg_form input{
+   height: 3.3rem;
+  }
+
+  .reg_form a{
+   font-size: 1.2em;
+   transition: all .3s;
+   color: #5c5b5b;
+   text-decoration: none;
+   margin-left: 60px;
+   
+  }
+  .reg_form a:hover{
+margin-left: 55px;
+transition: all .3s;
+  }
+
+  form div.err p{
+   color:red;
+   font-style: italic;
+   font-size: 0.8rem;
+  }
+
+
+
+
+
+  body
+  {
+     background-color: #c6d3bf;
+     color: #000000;
+     font-family: Arial;
+     font-weight: normal;
+     font-size: 13px;
+     line-height: 1.1875;
+     margin: 0;
+     padding: 0;
+  }
+  
+     
+  
+
+
+
+/* #Button1 {
    border:2px solid black;
    color:red;
    
@@ -92,4 +143,4 @@ body
 }
 
 
-
+ */

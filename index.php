@@ -1,5 +1,150 @@
-
 <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Початкова школа</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+   </head>
+  <body>
+   <!-- header  -->
+   <?php require_once 'app/include/header.php';?>
+<!-- header end -->
+
+
+
+<!-- блок main start  -->
+<div class="container">
+    <div class="content row">
+
+
+
+    <!-- sidebar content -->
+<div class="sidebar col-md-3 col-12 ">
+
+<div class="section search">
+  <h3>Пошук</h3>
+  <form action="index.php" method="post">
+    <input type="text" name="search-term" class="text-input" placeholder="Введiть слово для пошуку...">
+  </form>
+</div>
+
+
+<div class="section topics">
+  <h3>Категорii</h3>
+
+  <ul>
+    <li><a href="#">Електронні щоденники та журнали</a></li>
+    <li><a href="#">Електронні звернення</a></li>
+    <li><a href="#">ПАРТНЕРИ ПРОЕКТУ</a></li>
+    <li><a href="#">Новини проекту</a></li>
+    <li><a href="#">Контакти</a></li>
+    <li><a href="#">Увійти</a></li>
+  </ul>
+
+</div>
+
+
+      </div>
+<!-- sidebar content end-->
+
+<!-- блок main content    -->
+    <div class="main-conent col-md-9 col-12">
+
+        <h2>Последние публикации</h2>
+
+        <div class="post row">
+          <!-- <div class="img col-12 col-md-4">
+            <img src="assets/images/foto_bee/bee10.jpg" alt="" class="img-thumbnail">
+          </div> -->
+          <div class="post_text col-12 col-md-12">
+            <h3>
+              <a href="#">Правила прийому учнiв</a>
+            </h3>
+            <i class="far fa-user">Имя автора</i>
+            <i class="far fa-calendar ">Август 18,2023</i>
+            <p class="preview-text">
+              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
+              даль безопасную инициал коварных дороге злых маленький грамматики!
+            </p>
+            <p class="preview-text">
+              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
+              даль безопасную инициал коварных дороге злых маленький грамматики!
+            </p>
+            <p class="preview-text">
+              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
+              даль безопасную инициал коварных дороге злых маленький грамматики!
+            </p>
+            <p class="preview-text">
+              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
+              даль безопасную инициал коварных дороге злых маленький грамматики!
+            </p>
+            <p class="preview-text">
+              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
+              даль безопасную инициал коварных дороге злых маленький грамматики!
+            </p>
+            <p class="preview-text">
+              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
+              даль безопасную инициал коварных дороге злых маленький грамматики!
+            </p>
+            <p class="preview-text">
+              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
+              даль безопасную инициал коварных дороге злых маленький грамматики!
+            </p>
+            <p class="preview-text">
+              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
+              даль безопасную инициал коварных дороге злых маленький грамматики!
+            </p>
+          </div>
+        </div>
+         </div>
+
+
+
+</div>
+<!-- блок main content end   -->
+
+
+
+    </div>
+
+</div>
+
+<!-- блок main end  -->
+
+<!-- footer -->
+
+   <?php require_once 'app/include/footer.php';?>
+<!-- footer end -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1d9689321f.js" crossorigin="anonymous"></script>
+
+   </body>
+</html>
+
+
+
+
+
+
+
+
+
+<!-- <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -121,4 +266,4 @@ cmDrawFromText('MenuBar1', 'hbr', cmMenuBar1, 'MenuBar1');
 
 </body>
 </html>
-
+ -->
