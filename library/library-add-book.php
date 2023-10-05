@@ -33,19 +33,23 @@ if ( !empty($name) && !empty($date_edition)&& !empty($number)) {
   }
     for($i=$number;$i<=$number_end ;$i++){// цикл для додавання декiлька книг
       try {
-    $sql = "INSERT INTO `library` (`id`, `inv_number`, `name_book`, `date_edition`, `borrow_date`,
-     `return_date`, `id_teachers`, `id_schoolboys`) VALUES (NULL, '$i', '$name', '$date_edition', NULL,
-      NULL, NULL, NULL)";
 
-    mysqli_query($db, $sql);
+$params=[
+    // 'id'=>NULL,
+    'inv_number'=>$i,
+     'name_book'=>$name,
+     'date_edition'=>$date_edition,
 
-  } catch (mysqli_sql_exception $e) {
-    // Перевiрка на помилку дублювання запису
-    if (strpos($e->getMessage(), "Duplicate entry") !== false) {
+];
+ insert('library',$params);
+
+  } catch (PDOException $e) {
+    // Проверка на ошибку дублирования записи
+    if ($e->getCode() === '23000') {
       $text= "Книга з таким iнв. номером вже знаходиться в бiблiотецi!!! ";
-     break;
+
     }
-}
+  }
 $text= "Книга успiшно додана в бiблiотеку!!! ";
     }
   }
@@ -85,7 +89,7 @@ $text= "Книга успiшно додана в бiблiотеку!!! ";
 </form>
 <!-- </div> -->
 
-<h1 style='color:red;position:absolute;left:277px;top:449px;';><?=$text?></h1>
+<h1 style='color:red;position:absolute;left:0px;top:549px;';><?=$text?></h1>
 
    </div>
 </div>

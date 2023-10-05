@@ -1,3 +1,10 @@
+<?php 
+session_start();
+
+  require_once 'path.php'; 
+  ?>
+
+
 <!doctype html>
 <html lang="en">
   <head>

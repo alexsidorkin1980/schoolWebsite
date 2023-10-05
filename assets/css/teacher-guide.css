@@ -12,7 +12,7 @@ body
 
    .table-content {
       width: 831px;
-      height: 5000px;
+      /* height: 500px; */
       background-color: #87e687;
       padding: 20px;
       border: 1px solid #ccc;
@@ -26,6 +26,18 @@ body
       padding: 20px;
       
           }
+
+
+
+          input{
+            background: none;
+            border: none;
+            color: #007bff; /* Цвет текста, по желанию */
+            text-decoration: underline; /* Добавляет подчеркивание как у ссылки */
+            cursor: pointer; /* Показывает, что это кликабельный элемент */
+            padding: 0; /* Убирает внутренний отступ */
+            font-size: inherit; /* Использует размер шрифта как у окружающего текста */
+        } 
 
 /*
 body

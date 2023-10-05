@@ -76,32 +76,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if (!empty($invNumber)) {//перевiрка на вiдсутнiсть invNumber
                 
-                $sql = "SELECT * FROM library WHERE inv_number = '$invNumber'";
-                $result = mysqli_query($db, $sql);
+                // $sql = "SELECT * FROM library WHERE inv_number = '$invNumber'";
+                // $result = mysqli_query($db, $sql);
+                $result = selectAll('library',['inv_number'=>$invNumber]);
 
-                if (mysqli_num_rows($result) > 0) {
+                if (count($result) > 0) {
+                    $resultSelect =selectAll('library',['inv_number'=>$invNumber]);
             // Запрос для выборки значения id из таблицы library
-            $sqlSelect = "SELECT id FROM library WHERE inv_number = ' $invNumber '";
-            $resultSelect = mysqli_query($db, $sqlSelect);
-
-            $sqlborr = "SELECT * FROM library WHERE inv_number = ' $invNumber '"; 
-            $resultborr = mysqli_query($db, $sqlborr);
-             $sqlbr = mysqli_fetch_assoc($resultborr);
+            // $sqlSelect = "SELECT id FROM library WHERE inv_number = ' $invNumber '";
+            // $resultSelect = mysqli_query($db, $sqlSelect);
+           
+            $sqlbr =selectAll('library',['inv_number'=>$invNumber]);
+            // $sqlborr = "SELECT * FROM library WHERE inv_number = ' $invNumber '"; 
+            // $resultborr = mysqli_query($db, $sqlborr);
+            //  $sqlbr = mysqli_fetch_assoc($resultborr);
              $return=$sqlbr['return_date'];
 
             if(empty($sqlbr['id_teachers'])&&!empty($sqlbr['id_schoolboys'])){
              $id_schoolboy=$sqlbr['id_schoolboys'];
-             $sqlboys = "SELECT * FROM schoolboys WHERE id_classes=' $id_schoolboy'";
-             $result_sc = mysqli_query($db, $sqlboys);
-             $rsb = mysqli_fetch_assoc($result_sc);
+             $rsb =selectAll('schoolboys',['id_classes'=>$id_schoolboy]);
+            //  $sqlboys = "SELECT * FROM schoolboys WHERE id_classes=' $id_schoolboy'";
+            //  $result_sc = mysqli_query($db, $sqlboys);
+            //  $rsb = mysqli_fetch_assoc($result_sc);
              $name=$rsb['pip'];
             } 
             else  
             if(empty($sqlbr['id_schoolboys'])&&!empty($sqlbr['id_teachers'])){
                 $id_teachers=$sqlbr['id_teachers'];
-                $sqlv = "SELECT * FROM teachers WHERE class_id=' $id_teachers'";
-                $result_scv = mysqli_query($db, $sqlv);
-                $rsb = mysqli_fetch_assoc($result_scv);
+                $rsb =selectAll('teachers',['class_id'=>$id_teachers]);
+
+                // $sqlv = "SELECT * FROM teachers WHERE class_id=' $id_teachers'";
+                // $result_scv = mysqli_query($db, $sqlv);
+                // $rsb = mysqli_fetch_assoc($result_scv);
                 $name=$rsb['pip'];
             }
 
@@ -111,10 +117,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              else{
                 $text='';   
                 
-            if ($resultSelect && mysqli_num_rows($resultSelect) > 0) {
-                $row = mysqli_fetch_assoc($resultSelect);
-                $idValue = $row['id'];//id library
+        //     if ($resultSelect && mysqli_num_rows($resultSelect) > 0) {
+        //         $row = mysqli_fetch_assoc($resultSelect);
+        //         $idValue = $row['id'];//id library
         
+        // }
+
+        if ($resultSelect && count($resultSelect) > 0) {
+            $row = reset($resultSelect);
+            $idValue = $row['id'];//id library
         }
 
         if ($selectedType == 'students') {
@@ -123,7 +134,10 @@ if($selectedValue==$sqlbr['id_schoolboys']){//перевiрка на знахо�
             $sql = "UPDATE library
             SET return_date = NOW(),borrow_date = null,id_schoolboys=null
             WHERE  `library`.`id` = $idValue";
-             $result_schoolb = mysqli_query($db, $sql);
+            //  $result_schoolb = mysqli_query($db, $sql);
+            $query=$pdo->prepare($sql);
+             $query->execute();
+             dbCheckError($query);
             }else{$text='Книга знаходиться в iншого користувача!!';}
             
         } else if ($selectedType == 'teachers') {
@@ -132,7 +146,10 @@ if($selectedValue==$sqlbr['id_teachers']){//перевiрка на знаход�
             $sql = "UPDATE library
             SET return_date = NOW(),borrow_date = null,id_teachers=null
             WHERE  `library`.`id` = $idValue";
-            $result_teach = mysqli_query($db, $sql);
+            // $result_teach = mysqli_query($db, $sql);
+            $query=$pdo->prepare($sql);
+            $query->execute();
+            dbCheckError($query);
 }else{$text='Книга знаходиться в iншого користувача!!';}
         }
         

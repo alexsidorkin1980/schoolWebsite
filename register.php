@@ -1,85 +1,7 @@
 <?php
 session_start();
-
-// Перевiрка наявностi ролi в сесii
-// if (!isset($_SESSION['role'])) {
-//     header('Location:login.php');
-//     // include '..\config\login.php';
-//     exit();
-// }
-
-// // Перевiрка ролi для бiблiотекаря
-// if ($_SESSION['role'] == 'librarian') {
-//     echo'доступ закрыт';
-//     exit();
-// }
-
-// // Перевiрка ролi для user
-// if ($_SESSION['role'] == 'user') {
-//     echo'доступ закрыт';
-//     exit();
-// }
-// require_once '../index.php';
-
-
-session_start();
-$login=isset($_POST['login']) ? $_POST['login'] : '';
-$pass=isset($_POST['pass']) ? $_POST['pass'] : '';
-$text='';
-
-$pass=md5($pass."qsrtuh319876");//хеширование
-
-require_once'app/database/connect.php';
-require_once'app/database/db.php';
-
-// $db = connectDb($BD);
-
-if (!empty($login) && !empty($pass)) {
-   $sql = "SELECT * FROM `register_bd` WHERE `login` LIKE '$login' AND `pass` LIKE '$pass'";
-   // $result = mysqli_query($db, $sql);
-   // $s = mysqli_fetch_array($result);
-// подготовка запроса
-$stmt = $pdo->prepare($sql);
-// Выполнение запроса
-$stmt->execute();
-// проверка на ошибки
-dbCheckError($stmt);
-// Получение результата
-$s = $stmt->fetchAll();
-
-$item = $s[0];
-    $id = $item['id'];
-  $login=$item['login'];
-  $role=$item['role'];
-
-   if ($s !== null) {
-      setcookie('user',$login,time()+3600*24*30,"/");
-       $_SESSION['role'] = $role;
-
-       if ($_SESSION['role'] == 'admin'||$_SESSION['role'] == 'librarian'
-       ||$_SESSION['role'] == 'user') {
-           header('Location: ../index.php');
-           exit();
-       } else {
-       // Неверный логин или пароль
-       $text= "Неверный логин или пароль";
-   }
-} 
-}
-
-else {
-   // Не заполнены логин или пароль
-   $text= "Введите логин и пароль";
-}
-//видалення куки при натисненнi выход
-if(isset($_GET['coock'])&&$_GET['coock']=='update'){
-   setcookie('user', '', time() - 3600, '/');
-   unset($_SESSION['role']);
-    header('Location: ../index.php');
-    exit(); 
-}
-
-
+require_once 'path.php'; 
+include("app/controllers/users.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -102,33 +24,33 @@ if(isset($_GET['coock'])&&$_GET['coock']=='update'){
 <?php
 require_once './app/database/connect.php';//пiдключення до бази
  require_once './app/database/db.php';//пiдключення до бази
- $text='';
- $role='';
- $login=isset($_POST['login']) ? $_POST['login'] : '';
+//  $text='';
+//  $role='';
+//  $login=isset($_POST['login']) ? $_POST['login'] : '';
   
- $pass=isset($_POST['pass']) ? $_POST['pass'] : '';
- $email=isset($_POST['email']) ? $_POST['email'] : ''; 
- //перевiрка на допустиму довжину
- if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (mb_strlen($login) < 3 || mb_strlen($login) > 90) {
-        echo "Недопустимая длина логина";
-        exit();
-    } else if (strlen($pass) < 6 || strlen($pass) > 14) {
-        echo "Недопустимая длина пароля (от 6 до 14 символов)";
-        exit();
-    }
- }
+//  $pass=isset($_POST['pass']) ? $_POST['pass'] : '';
+//  $email=isset($_POST['email']) ? $_POST['email'] : ''; 
+//  //перевiрка на допустиму довжину
+//  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     if (mb_strlen($login) < 3 || mb_strlen($login) > 90) {
+//         echo "Недопустимая длина логина";
+//         exit();
+//     } else if (strlen($pass) < 6 || strlen($pass) > 14) {
+//         echo "Недопустимая длина пароля (от 6 до 14 символов)";
+//         exit();
+//     }
+//  }
  
- $pass=md5($pass."qsrtuh319876");
-//  require_once'../config/connect.php';
-//  $db = connectDb($BD);
- //запит на додавання даних логiна i паролю в базу
- if (!empty($login) && !empty($pass)) {
-    $sql = "INSERT INTO `register_bd` (`id`, `login`,`pass`,`email`) VALUES (NULL, '$login','$pass','$email')";
-    mysqli_query($db, $sql);
-    $text="РЕГИСТРАЦИЯ УСПЕШНО ПРОВЕДЕНА!!";
-    //exit();
- }
+//  $pass=md5($pass."qsrtuh319876");
+// //  require_once'../config/connect.php';
+// //  $db = connectDb($BD);
+//  //запит на додавання даних логiна i паролю в базу
+//  if (!empty($login) && !empty($pass)) {
+//     $sql = "INSERT INTO `register_bd` (`id`, `login`,`pass`,`email`) VALUES (NULL, '$login','$pass','$email')";
+//     mysqli_query($db, $sql);
+//     $text="РЕГИСТРАЦИЯ УСПЕШНО ПРОВЕДЕНА!!";
+//     //exit();
+//  }
 
 
 
@@ -138,9 +60,9 @@ require_once './app/database/connect.php';//пiдключення до бази
 
        <!-- FORM -->
   <div class="container reg_form">
-  <form class="row justify-content-center" method="post" action="reg.php">
+  <form class="row justify-content-center" method="post" action="register.php">
     <h2>Форма регистрации</h2>
-    <div class="mb-3 col-12 col-md-4 err"><p><?=$text;?></p></div>
+    <div class="mb-3 col-12 col-md-4 err"><p><?=$errMsg;?></p></div>
     <div class="w-100"></div>
     <div class="mb-3 col-12 col-md-4">
         <label for="formGroupExampleInput" class="form-label">Логин</label>
@@ -165,7 +87,7 @@ require_once './app/database/connect.php';//пiдключення до бази
     <div class="w-100"></div>
     <div class="mb-3 col-12 col-md-4">
     <button type="submit" class="btn btn-primary  btn-secondary" name="button-reg">Зарегистрироваться</button>
-    <a href="log.php">Войти</a>
+    <a href="login.php">Войти</a>
 </div>
   </form>
 </div>

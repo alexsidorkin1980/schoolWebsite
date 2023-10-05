@@ -1,6 +1,8 @@
 <?php 
-
+session_start();
 require('connect.php');
+
+
 
 function tt($value){
     echo '<pre>';
@@ -21,17 +23,29 @@ function dbCheckError($query){
 
 // запрос на прлучение данных с одной таблицы
 
-function selectAll($table,$params=[]){
+function selectAll($table,$params=[],$orderBy = ''){
     global $pdo;
 $sql="SELECT * FROM $table ";
+
+
 if(!empty($params)){
    $i=0;
    foreach($params as $key=>$value){
+    if ($value === null&&$i!==0) {
+        $sql .= " AND $key IS NULL"; // Для NULL значения
+
+       
+    } else {
+       
 if(!is_numeric($value)){
     $value="'".$value."'";
 }
  if($i===0){
-$sql=$sql." WHERE $key=$value";
+    if($value === null){
+        $sql=$sql." WHERE $key=$value";  
+    }
+    $sql .= " WHERE $key IS NULL";
+
 }
 else{
      $sql=$sql." AND $key=$value";
@@ -39,6 +53,12 @@ else{
  $i++;
    }
 }
+}
+if (!empty($orderBy)) {
+    $sql .= " ORDER BY $orderBy";
+}
+// tt($sql);
+// exit();
 $query=$pdo->prepare($sql);
 $query->execute();
 dbCheckError($query);
@@ -47,6 +67,50 @@ return $query->fetchAll();
 
 // tt($sql);
 // exit();
+
+
+// function selectAll($table, $params = [], $orderBy = '') {
+//     global $pdo;
+//     $sql = "SELECT * FROM $table ";
+
+//     if (!empty($params)) {
+//         $i = 0;
+//         foreach ($params as $key => $value) {
+//             if ($value === null && $i !== 0||$value === null) {
+//                 $sql .= " AND $key IS NULL"; // Для NULL значения
+//             } else {
+//                 if (!is_numeric($value)) {
+//                     $value = "'" . $value . "'";
+//                 }
+//                 if ($i === 0) {
+//                     $sql .= " WHERE ";
+//                 } else {
+//                     $sql .= " AND ";
+//                 }
+//                 if ($value === null) {
+//                     $sql .= "$key IS NULL";
+//                 } else {
+//                     $sql .= "$key=$value";
+//                 }
+//                 $i++;
+//             }
+//         }
+//     }
+
+//     if (!empty($orderBy)) {
+//         $sql .= " ORDER BY $orderBy";
+//     }
+
+//     tt($sql); // Отладочный вывод SQL-запроса
+//     exit();
+
+//     $query = $pdo->prepare($sql);
+//     $query->execute();
+//     dbCheckError($query);
+//     return $query->fetchAll();
+// }
+
+
 
 // запрос на получение одной строки с выбранной таблицы
 function selectOne($table,$params=[]){
@@ -74,8 +138,7 @@ function selectOne($table,$params=[]){
     dbCheckError($query);
      return $query->fetch();
 
-    // tt($query->fetch());
-    //  exit();
+   
     }
 
 
@@ -155,6 +218,20 @@ $query=$pdo->prepare($sql);
 $query->execute();
 dbCheckError($query);
 
+}
+function removeClassIdForTeacher($teacherId) {
+    global $pdo;
+
+    try {
+        $sql = "UPDATE teachers SET class_id = NULL WHERE id = :teacherId";
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':teacherId', $teacherId, PDO::PARAM_INT);
+        $query->execute();
+        // Обработка успешного выполнения запроса, если необходимо
+    } catch (PDOException $e) {
+        // Обработка ошибок, если они возникнут
+        echo "Ошибка при удалении class_id для учителя с id $teacherId: " . $e->getMessage();
+    }
 }
 
 // $arrData=[
