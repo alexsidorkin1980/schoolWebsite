@@ -12,7 +12,7 @@ $_SESSION['login'] =$existance['username'];
 $_SESSION['admin'] =$existance['admin'];
 
 if($_SESSION['admin']){
-  header('Location: '.BASE_URL . 'admin/admin.php');
+  header('Location: '.BASE_URL . 'admin/users/index.php');
 
 }else {
 header('Location: '.BASE_URL);

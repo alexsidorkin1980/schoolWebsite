@@ -1,4 +1,4 @@
-
+<?php // require_once'../app/include/path.php';?>
 <header class="container-fluid">
     <div class="container">
       <div class="row">
@@ -41,7 +41,7 @@
 
    <li>
 
-   <?php if(isset($_SESSION['id'])):   ?>
+   <?php if(isset($_SESSION['id'])): ?>
 
 <a href="#"><i class="fa fa-user"></i><?=$_SESSION['login'];?></a>
 
@@ -49,7 +49,7 @@
 
 
 <?php  if($_SESSION['admin']):   ?>
-  <li><a href="#">Админ панель</a></li>
+  <li><a href="/admin/topics/index.php">Админ панель</a></li>
   <?php  endif; ?>
 
   <li><a href="logout.php">Выход</a></li>

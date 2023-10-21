@@ -1,8 +1,9 @@
 <?php 
 session_start();
-require_once 'path.php'; 
-require_once 'app/controllers/topics.php'; 
+
+  require_once '../../path.php'; 
   ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -14,122 +15,58 @@ require_once 'app/controllers/topics.php';
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caprasimo&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/admin.css">
 
    </head>
   <body>
    <!-- header  -->
-   <?php require_once 'app/include/header.php';?>
+   <?php require_once '../../app/include/header-admin.php'; ?>
 <!-- header end -->
 
-<!-- блок main start  -->
 <div class="container">
-    <div class="content row">
+<!-- sidebar start -->
+<?php  require_once '../../app/include/sidebar-admin.php';?>
+<!-- sidebar end -->
 
-
-
-    <!-- sidebar content -->
-<div class="sidebar col-md-3 col-12 ">
-
-<div class="section search">
-  <h3>Пошук</h3>
-  <form action="index.php" method="post">
-    <input type="text" name="search-term" class="text-input" placeholder="Введiть слово для пошуку...">
-  </form>
-</div>
-
-
-<div class="section topics">
-  <h3>Категорii</h3>
-
-  <ul>
-  <?php 
-  foreach($topics as $key=>$topic){ ?>
-    <li><a href="#"><?=$topic['name'];?></a></li>
-    <?php }?>
-  </ul>
+<div class="posts col-10">
+<div class="button row">
+<a href="<?= BASE_URL . "admin/students/create.php" ?>" class="col-2 btn btn-success">Добавить</a>
+<span class="col-1"></span>
+<a href="<?= BASE_URL . "admin/students/index.php" ?>" class="col-3 btn btn-warning">Изменить</a>
 
 </div>
 
-
-      </div>
-<!-- sidebar content end-->
-
-<!-- блок main content    -->
-    <div class="main-conent col-md-9 col-12">
-
-        <h2>Последние публикации</h2>
-
-        <div class="post row">
-          <!-- <div class="img col-12 col-md-4">
-            <img src="assets/images/foto_bee/bee10.jpg" alt="" class="img-thumbnail">
-          </div> -->
-          <div class="post_text col-12 col-md-12">
-            <h3>
-              <a href="#">Правила прийому учнiв</a>
-            </h3>
-            <i class="far fa-user">Имя автора</i>
-            <i class="far fa-calendar ">Август 18,2023</i>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-            <p class="preview-text">
-              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
-              То парадигматическая текстов текст себя подзаголовок запятых рыбными коварный семь домах раз,
-              даль безопасную инициал коварных дороге злых маленький грамматики!
-            </p>
-          </div>
-        </div>
-         </div>
-
-
+<div class="row title-table">
+  <h2>Управление учениками</h2>
+  <div class=" col-1">ID</div>
+  <div class=" col-3">ФИО</div>
+  <div class="  col-1">класс</div>
+  <div class="del col-2"><a href="">Управление</a></div>
+  <div class="  col-5">Доп. сведения</div>
 
 </div>
-<!-- блок main content end   -->
-
-
-
-    </div>
-
+<div class="row post">
+  <div class="id col-1">1</div>
+  <div class="id col-3"><a href="">Иванов Иван Иванович</a></div>
+  <div class="title  col-1">1-А </div>
+  <div class="del col-2"><a href="">delete</a></div>
+  <div class="title  col-5"><a href="">>>>></a></div>
+</div>
+<div class="row post">
+  <div class="id col-1">1</div>
+  <div class="id col-3"><a href=''>Петров Петр Петрович</a></div>
+  <div class="title  col-1">1-Б</div>
+  <div class="del col-2"><a href="">delete</a></div>
+  <div class="title  col-5"><a href="">>>>></a></div>
+</div>
+</div>
 </div>
 
-<!-- блок main end  -->
+
 
 <!-- footer -->
 
-   <?php require_once 'app/include/footer.php';?>
+   <?php require_once '../../app/include/footer.php';?>
 <!-- footer end -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
