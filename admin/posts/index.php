@@ -63,13 +63,13 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
   <div class="id col-1"> <?=$key+1 ?></div>
   <div class="id col-3"> <?= $post['title']?></div>
   <div class="title  col-2"><?=$post['username']?></div>
-  <div class="red  col-2"><a href="">edit</a></div>
-  <div class="del col-2"><a href="">delete</a></div>
+  <div class="red  col-2"><a href="edit.php?id=<?=$post['id']?>">edit</a></div>
+  <div class="del col-2"><a href="edit.php?delete_id=<?=$post['id']?>">delete</a></div>
 
   <?php if($post['status']){ ?>
-  <div class="status col-2"><a href="">unpublish</a></div>
+  <div class="status col-2"><a href="edit.php?publish=0&id_pub=<?=$post['id']?>">unpublish</a></div>
   <?php }else { ?>
-  <div class="status col-2"><a href="">publish</a></div>
+  <div class="status col-2"><a href="edit.php?publish=1&id_pub=<?=$post['id']?>">publish</a></div>
   <?php  }  ?>
 
   

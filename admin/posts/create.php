@@ -56,20 +56,24 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </div>
 
 <div class="row add-post">
- <form action="create.php" method='post'>
+<div class="mb-12 col-12 col-md-12 err">
+<?php require_once '../../app/helps/errorInfo.php'; ?>
+</p></div>
+
+ <form action="create.php" method='post' enctype ="multipart/form-data">
     <div class="col mb-4" >
-        <input type="text" name='title' class="form-control" placeholder="Название" aria-label="Название">
+        <input type="text" name='title' value='<?=$title?>' class="form-control" placeholder="Название" aria-label="Название">
     </div>
     <div class="col">
   <label for="editor" class="form-label ">Содержимое записи</label>
-  <textarea id='editor'name='content' class="form-control" rows="6"></textarea>
+  <textarea id='editor'name='content' class="form-control" rows="6"><?=$content?></textarea>
 </div>
 <div class="input-group col mb-4 mt-4">
   <input type="file" class="form-control" name='img' id="inputGroupFile02">
   <label class="input-group-text" for="inputGroupFile02">Upload</label>
 </div>
 <select class="form-select mb-2" name='topic' aria-label="Default select example">
-  <option selected>Open this select menu</option>
+  <option selected disabled>Выбор категории:</option>
   <?php foreach($topics as $topic){?>
   <option value=" <?=$topic['id'] ?>"><?= $topic['name'] ?></option>
   <?php }?>

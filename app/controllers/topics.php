@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../app/database/db.php';
     $id='';
     $name_topic='';
     $description_topic='';
-    $errMsg='';
+    $errMsg=[];
     
 
     $topics=selectAll('topics');
@@ -23,10 +23,10 @@ require_once __DIR__ . '/../../app/database/db.php';
 
 
     if($name_topic===''||$description_topic===''){// проверка на заполнение всех полей
-        $errMsg='Не все поля заполнены!!!';
+      array_push($errMsg,"Не все поля заполнены!!!");
       }
       else if(mb_strlen($name_topic,'UTF8')<2){// проверка на количество символов логина
-        $errMsg='Логин должен быть больше 2-х символов!!!';
+        array_push($errMsg,"Логин должен быть больше 2-х символов!!!");
       }
       else {
       
@@ -84,10 +84,10 @@ require_once __DIR__ . '/../../app/database/db.php';
         $description_topic=trim($_POST['description_topic']);
 
     if($name_topic===''||$description_topic===''){// проверка на заполнение всех полей
-        $errMsg='Не все поля заполнены!!!';
+      array_push($errMsg,"Не все поля заполнены!!!");
       }
       else if(mb_strlen($name_topic,'UTF8')<2){// проверка на количество символов логина
-        $errMsg='Логин должен быть больше 2-х символов!!!';
+        array_push($errMsg,"Логин должен быть больше 2-х символов!!!");
       }
     //   else {
       

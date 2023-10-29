@@ -2,6 +2,7 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/topics.php'; 
   ?>
 
 <!doctype html>
@@ -54,6 +55,9 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </div>
 
 <div class="row add-post">
+<div class="mb-12 col-12 col-md-12 err">
+<?php require_once '../../app/helps/errorInfo.php'; ?>
+</p></div>
  <form action="creat.php" method='post'>
 
  <div class="col">

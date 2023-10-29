@@ -340,3 +340,15 @@ transition: all .3s;
 /* .add-post form div{
 margin: 2rem 0;
 } */
+
+.add-post .err{
+    padding: 1rem 0;
+    color: brown;
+}
+
+.add-post .err ul{
+list-style-type: none;
+padding-left: 10px;
+font-weight: 500;
+}
+

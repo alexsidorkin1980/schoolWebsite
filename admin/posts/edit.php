@@ -2,9 +2,9 @@
 session_start();
 
   require_once '../../path.php'; 
-  require_once '../../app/controllers/topics.php'; 
-  // tt($name_topic);
-  // tt($description_topic);
+  require_once '../../app/controllers/posts.php'; 
+
+  // tt($topics);
   // exit();
   ?>
 
@@ -41,37 +41,52 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
   <!-- END HEADER -->
   
 <div class="container">
-
-<!-- sidebar start -->
 <?php require_once '../../app/include/sidebar-admin.php';?>
-<!-- sidebar end -->
 
 <div class="posts col-8">
-<div class="button row">
-<a href="<?= BASE_URL . "admin/topics/create.php" ?>" class="col-2 btn btn-success">Создать</a>
-<span class="col-1"></span>
-<a href="<?= BASE_URL . "admin/topics/index.php" ?>" class="col-3 btn btn-warning">Изменить</a>
-
-</div>
 
 <div class="row title-table">
-  <h2>Создать категорию</h2>
+  <h2>Добавление записи</h2>
 </div>
 
 <div class="row add-post">
-<div class="mb-12 col-12 col-md-12 err">
-<?php require_once '../../app/helps/errorInfo.php'; ?>
+<div class="mb-12 col-12 col-md-12 err"><p>
+    
+<?php 
+
+
+require_once '../../app/helps/errorInfo.php'; 
+
+?>
 </p></div>
- <form action="create.php" method='post'>
-    <div class="col">
-        <input type="text" class="form-control" value="<?=$name_topic;?>" name='name_topic' placeholder="Имя категории" aria-label="Имя категории">
+
+ <form action="edit.php" method='post' enctype ="multipart/form-data">
+    <div class="col mb-4" >
+        <input type="text" name='title' value='<?=$title?>' class="form-control" placeholder="Название" aria-label="Название">
+        <input type="hidden" name='id' value='<?=$id?>'>
     </div>
     <div class="col">
-    <label for="content" class="form-label">Описание категории</label>
-    <textarea class="form-control"  name='description_topic' id="content" rows="6"><?=$description_topic;?></textarea>
-    </div>
-<div class="col">
-    <button class="btn btn-primary" name='create_topic' type="submit">Создать категорию</button>
+  <label for="editor" class="form-label ">Содержимое записи</label>
+  <textarea id='editor'name='content' class="form-control" rows="6"><?=$content?></textarea>
+</div>
+<div class="input-group col mb-4 mt-4">
+  <input type="file" class="form-control" name='img' id="inputGroupFile02">
+  <label class="input-group-text" for="inputGroupFile02">Upload</label>
+</div>
+<select class="form-select mb-2" name='topic' aria-label="Default select example">
+  <!-- <option selected disabled>Выбор категории:</option> -->
+  <?php foreach($topics as $topic){?>
+  <option value=" <?=$topic['id'] ?>"><?= $topic['name'] ?></option>
+  <?php }?>
+</select>
+<div class="form-check">
+  <input name='publish' class="form-check-input" type="checkbox" value="1" id="flexCheckChecked" checked>
+  <label class="form-check-label" for="flexCheckChecked">
+  Publish
+  </label>
+</div>
+<div class="col mb-4">
+    <button class="btn btn-primary" name='edit_post' type="submit">Обновить запись</button>
   </div>
 
  </form>
@@ -111,6 +126,10 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
     -->
   <!-- font avesom -->
   <script src="https://kit.fontawesome.com/1d9689321f.js" crossorigin="anonymous"></script>
+
+  <!-- добавление визуального редактора к текстовому полю админки -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+  <script src="../../assets/js/script.js"></script> 
 </body>
 
 </html>

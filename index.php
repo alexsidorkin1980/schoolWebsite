@@ -2,6 +2,7 @@
 session_start();
 require_once 'path.php'; 
 require_once 'app/controllers/topics.php'; 
+require_once 'app/controllers/posts.php'; 
   ?>
 
 <!doctype html>
