@@ -2,6 +2,10 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/students.php';
+  $students=selectAllFromClasssWithStudentsOneIndex('classes','students');
+
+  //  tt($teachers);
   ?>
 
 
@@ -45,20 +49,18 @@ session_start();
   <div class="  col-5">Доп. сведения</div>
 
 </div>
-<div class="row post">
-  <div class="id col-1">1</div>
-  <div class="id col-3"><a href="">Иванов Иван Иванович</a></div>
-  <div class="title  col-1">1-А </div>
-  <div class="del col-2"><a href="">delete</a></div>
-  <div class="title  col-5"><a href="">>>>></a></div>
+
+<?php foreach($students as $student){?>
+  <div class="row post">
+    <div class="id col-1"><?=$student['id']?></div>
+  <div class="id col-3"><a href=""><?=$student['name']?></a></div>
+  <div class="title  col-1"><?=$student['number'].'-'.$student['letter']?></div>
+  <div class="del col-1"><a href="edit.php?id=<?=$student['id']?>">edit</a></div>
+  <div class="del col-1"><a href="index.php?id_delete=<?=$student['id']?>">delete</a></div>
+  <div class="title  col-5"><a href="info.php?id_inf=<?=$student['id']?>">>>>></a></div>
 </div>
-<div class="row post">
-  <div class="id col-1">1</div>
-  <div class="id col-3"><a href=''>Петров Петр Петрович</a></div>
-  <div class="title  col-1">1-Б</div>
-  <div class="del col-2"><a href="">delete</a></div>
-  <div class="title  col-5"><a href="">>>>></a></div>
-</div>
+<?php }?>
+
 </div>
 </div>
 

@@ -57,7 +57,9 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </div>
 
 <div class="row add-post">
-<div class="mb-12 col-12 col-md-12 err"><p><?=$errMsg;?></p></div>
+<div class="mb-12 col-12 col-md-12 err"><p>
+<?php require_once '../../app/helps/errorInfo.php'; ?>
+</p></div>
  <form action="edit.php" method='post'>
     <div class="col">
         <input type="text" class="form-control" value='<?=$name_topic;?>' name='name_topic' placeholder="Имя категории" aria-label="Имя категории">

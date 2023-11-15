@@ -2,10 +2,12 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/teachers.php'; 
+
   ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <!-- Required meta tags -->
@@ -54,18 +56,24 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </div>
 
 <div class="row add-post">
- <form action="creat.php" method='post'>
 
+<div class="mb-12 col-12 col-md-12 err"><p>
+<?php require_once '../../app/helps/errorInfo.php'; ?>
+</p></div>
+ <form action="create.php" method='post'>
  <div class="col">
         <label for="formGroupExampleInput" class="form-label">ФИО</label>
-        <input name="login" value="<?//=$login;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите фамилию имя отчество...">
+        <input name="name" value="<?=$name;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите фамилию имя отчество...">
       </div>
       <div class="w-100"></div>
     <div class="col">
+   
     <div class="col">
-      <label for="exampleInputPassword1" class="form-label">Класс</label>
-      <input name="pass-first" type="text" class="form-control" id="exampleInputPassword1"placeholder="Введите класс...">
-    </div>
+    <label for="exampleInputPassword1" class="form-label">Класс</label>
+    
+     <?php require_once '../../app/helps/combobox.php';  ?>
+    
+     </div>
     <div class="w-100"></div>
       <label for="exampleInputEmail1" class="form-label">Email address</label>
       <input name="email" value="<?//=$email;?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Введите вашу почту...">
@@ -74,12 +82,12 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
     <div class="w-100"></div>
     <div class="col">
       <label for="exampleInputPassword1" class="form-label">Адрес</label>
-      <input name="pass-first" type="text" class="form-control" id="exampleInputPassword1"placeholder="Введите домашний адрес...">
+      <input name="address" type="text" value="<?=$address;?>" class="form-control" id="exampleInputPassword1"placeholder="Введите домашний адрес...">
     </div>
     <div class="w-100"></div>
     <div class="col">
       <label for="exampleInputPassword1" class="form-label">Телефон</label>
-      <input name="pass-first" type="tel" class="form-control" id="exampleInputPassword1"placeholder="Введите номер телефона...">
+      <input name="phon_number" type="tel" value="<?=$phon_number;?>" class="form-control" id="exampleInputPassword1"placeholder="Введите номер телефона...">
     </div>
     <div class="w-100"></div>
     <!-- <div class="col">
@@ -91,18 +99,20 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
       <label for="exampleInputPassword2" class="form-label">Password</label>
       <input name="pass-second" type="password" class="form-control" id="exampleInputPassword2"placeholder="Введите ваш пароль еще раз...">
     </div> -->
-    <select class="form-select" aria-label="Default select example">
+    <!-- <select class="form-select" aria-label="Default select example">
   <option selected>Open this select menu</option>
   <option value="1">User</option>
   <option value="2">Admin</option>
-</select>
+</select> -->
 
 <div class="col">
-    <button class="btn btn-primary" type="submit">Создать</button>
+    <button class="btn btn-primary" name='create_teacher' type="submit">Создать</button>
   </div>
   
  </form>
 </div>
+
+
 </div>
 </div>
 </div>

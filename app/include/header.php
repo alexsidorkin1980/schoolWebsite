@@ -13,21 +13,21 @@
 
 <li><a href="/index.php"><i class="fa-solid fa-house"></i> Головна</a></li>
 
-   <li><a href="#"><i class="fa-solid fa-lock"></></i>Адмiнiстрування</a>
+   <!-- <li><a href="#"><i class="fa-solid fa-lock"></></i>Адмiнiстрування</a>
               <ul>
                 <li><a href="/administration/add-teacher.php">Додати вчителя/класс</a></li>
                 <li><a href="/administration\add-student.php">Прийняти учня</a></li>
                 <li><a href="/administration/school_graduate.php?action=update">Кiнець навчального року</a></li>
               </ul>
-            </li>
+            </li> -->
 
-   <li><a href="#"><i class="fa-solid fa-folder"></i>Довiдники</a>
+   <!-- <li><a href="#"><i class="fa-solid fa-folder"></i>Довiдники</a>
               <ul>
                 <li><a href="/referenseSheet/teacher-guide.php">Вчителiв</a></li>
                 <li><a href="/referenseSheet/student-guide.php">Учня</a></li>
                 <li><a href="/referenseSheet/class-guide.php">Класу</a></li>
               </ul>
-            </li>
+            </li> -->
 
    <li><a href="#"><i class="fa-solid fa-book"></i>Бiблiотека</a>
               <ul>

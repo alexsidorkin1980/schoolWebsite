@@ -2,6 +2,7 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/users.php'; 
   ?>
 
 
@@ -28,7 +29,7 @@ session_start();
 <?php require_once '../../app/include/sidebar-admin.php';?>
 <!-- sidebar end -->
 
-<div class="posts col-8">
+<div class="posts col-10">
 <div class="button row">
 <a href="<?= BASE_URL . "admin/users/create.php" ?>" class="col-2 btn btn-success">Создать</a>
 <span class="col-1"></span>
@@ -39,26 +40,27 @@ session_start();
 <div class="row title-table">
   <h2>Управление пользователями</h2>
   <div class=" col-1">ID</div>
-  <div class=" col-5">Логин</div>
+  <div class=" col-2">Логин</div>
+  <div class=" col-5">Почта</div>
   <div class="  col-2">Роль</div>
-  <div class=" col-4">Управление</div>
+  <div class=" col-2">Управление</div>
   <!-- <div class="id col-1">ID</div>
   <div class="id col-1">ID</div> -->
 </div>
+<?php foreach($users as $key=>$user){ ?>
 <div class="row post">
-  <div class="id col-1">1</div>
-  <div class="id col-5">Alexandr80</div>
-  <div class="title  col-2">Аdmin </div>
-  <div class="red  col-2"><a href="">edit</a></div>
-  <div class="del col-1"><a href="">delete</a></div>
-</div>
-<div class="row post">
-  <div class="id col-1">1</div>
-  <div class="id col-5">Masha90</div>
+  <div class="id col-1"><?=$key+1?></div>
+  <div class="id col-2"><?=$user['username']?></div>
+  <div class="id col-5"><?=$user['email']?></div>
+  <?php if($user['admin']){?>
+  <div class="title  col-2">Admin</div>
+  <?php }else{?>
   <div class="title  col-2">User</div>
-  <div class="red  col-2"><a href="">edit</a></div>
-  <div class="del col-1"><a href="">delete</a></div>
+  <?php }?>
+  <div class="red  col-1"><a href="edit.php?id=<?=$user['id']?>">edit</a></div>
+  <div class="del col-1"><a href="index.php?id_delete=<?=$user['id']?>">delete</a></div>
 </div>
+<?php } ?>
 </div>
 </div>
 </div>

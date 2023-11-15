@@ -2,6 +2,7 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/classes.php'; 
   ?>
 
 <!doctype html>
@@ -13,9 +14,6 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap CSS -->
-
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
 integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   
@@ -58,36 +56,34 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 <?php require_once '../../app/helps/errorInfo.php'; ?>
 </p></div>
 
- <form action="creat.php" method='post'>
+ <form action="create.php" method='post'>
 
  <div class="col">
         <label for="formGroupExampleInput" class="form-label">Введите класс</label>
-        <input name="login" value="<?//=$login;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите новый класс...">
+        <select class="form-select" name="number" aria-label="Default select example">
+        <option selected></option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
       </div>
+
       <div class="w-100"></div>
     <div class="col">
       <label for="exampleInputEmail1" class="form-label">Введите букву</label>
-      <input name="email" value="<?//=$email;?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Введите букву...">
+      <select class="form-select" name="letter"aria-label="Default select example">
+        <option selected></option>
+        <option value="А">А</option>
+        <option value="Б">Б</option>
+        <option value="В">В</option>
+        <option value="Г">Г</option>
+      </select>
       <div id="emailHelp" class="form-text"></div>
     </div>
-    <!-- <div class="w-100"></div>
-    <div class="col">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input name="pass-first" type="password" class="form-control" id="exampleInputPassword1"placeholder="Введите ваш пароль...">
-    </div>
-    <div class="w-100"></div>
-    <div class="col">
-      <label for="exampleInputPassword2" class="form-label">Password</label>
-      <input name="pass-second" type="password" class="form-control" id="exampleInputPassword2"placeholder="Введите ваш пароль еще раз...">
-    </div>
-    <select class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
-  <option value="1">User</option>
-  <option value="2">Admin</option>
-</select> -->
-
 <div class="col">
-    <button class="btn btn-primary" type="submit">Создать</button>
+    <button class="btn btn-primary" name="creat_class" type="submit">Создать</button>
   </div>
   
  </form>

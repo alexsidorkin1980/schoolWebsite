@@ -135,7 +135,7 @@ $stmt = $pdo->prepare($sql);
 
 
   if(!empty($id_schoolboys)&&empty($id_teachers)){
-    $sql_boy = "SELECT * FROM `schoolboys` WHERE `id`='$id_schoolboys'";
+    $sql_boy = "SELECT * FROM `students` WHERE `id`='$id_schoolboys'";
     // подготовка запроса
      $stmt = $pdo->prepare($sql_boy);
     // Выполнение запроса
@@ -143,12 +143,12 @@ $stmt = $pdo->prepare($sql);
     // проверка на ошибки
     dbCheckError($stmt);
     // Получение результата
-    $sb = $stmt->fetchAll();
+    $sb = $stmt->fetch();
 
-    $item = $sb[0];
-    $id = $item['id'];
+    // $item = $sb[0];
+    $id = $sb['id'];
     
-    $name=$item['pip'].' (student)';
+    $name=$sb['name'].' (student)';
     // $dn = $item['dn'];
     // $id_classes = $item['id_classes'];
     // $graduate = $item['graduate'];
@@ -173,7 +173,7 @@ $stmt = $pdo->prepare($sql);
     $item = $st[0];
     $id = $item['id'];
     
-    $name=$item['pip'].' (teacher)';
+    $name=$item['name'].' (teacher)';
   }
   
   if(!empty( $return_date)||empty( $return_date)&&empty($borrow_date)){
@@ -222,7 +222,7 @@ dbCheckError($stmt);
     
 //визначаемо учня
 if(!empty($id_schoolboys)&&empty($id_teachers )){
-  $sql_boy = "SELECT * FROM `schoolboys` WHERE `id`='$id_schoolboys '";
+  $sql_boy = "SELECT * FROM `student` WHERE `id`='$id_schoolboys '";
   // $result_boy = mysqli_query($db, $sql_boy);
   // $sb = mysqli_fetch_array($result_boy);
   // $name=$sb['pip'].' (student)';//додаемо до пiп пояснення учень 
@@ -237,7 +237,7 @@ dbCheckError($stmt);
  $sms = $stmt->fetchAll();
  $item = $sms[0];
     $id = $item['id'];
-  $name=$item['pip'].' (schoolboys)';
+  $name=$item['name'].' (schoolboys)';
 }
 //визначаемо учителя
 if(empty($id_schoolboys)&&!empty($id_teachers )){
@@ -255,7 +255,7 @@ dbCheckError($stmt);
  $sms = $stmt->fetchAll();
  $item = $sts[0];
     $id = $item['id'];
-  $name=$item['pip'].' (teacher)';
+  $name=$item['name'].' (teacher)';
 }
 ?>
 

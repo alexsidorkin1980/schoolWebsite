@@ -2,7 +2,7 @@
 session_start();
 
   require_once '../../path.php'; 
-  require_once '../../app/controllers/topics.php'; 
+  require_once '../../app/controllers/users.php'; 
   ?>
 
 <!doctype html>
@@ -58,16 +58,16 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 <div class="mb-12 col-12 col-md-12 err">
 <?php require_once '../../app/helps/errorInfo.php'; ?>
 </p></div>
- <form action="creat.php" method='post'>
+ <form action="create.php" method='post'>
 
  <div class="col">
         <label for="formGroupExampleInput" class="form-label">Логин</label>
-        <input name="login" value="<?//=$login;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите ваш логин...">
+        <input name="login" value="<?=$login;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите ваш логин...">
       </div>
       <div class="w-100"></div>
     <div class="col">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input name="email" value="<?//=$email;?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Введите вашу почту...">
+      <input name="email" value="<?=$email;?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Введите вашу почту...">
       <div id="emailHelp" class="form-text"></div>
     </div>
     <div class="w-100"></div>
@@ -80,14 +80,14 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
       <label for="exampleInputPassword2" class="form-label">Password</label>
       <input name="pass-second" type="password" class="form-control" id="exampleInputPassword2"placeholder="Введите ваш пароль еще раз...">
     </div>
-    <select class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
-  <option value="1">User</option>
-  <option value="2">Admin</option>
-</select>
-
+    <div class="form-check">
+  <input name='admin' class="form-check-input" type="checkbox" value="1" id="flexCheckChecked">
+  <label class="form-check-label" for="flexCheckChecked">
+  Admin?
+  </label>
+</div>
 <div class="col">
-    <button class="btn btn-primary" type="submit">Создать</button>
+    <button class="btn btn-primary" name="create-user"type="submit">Создать</button>
   </div>
   
  </form>

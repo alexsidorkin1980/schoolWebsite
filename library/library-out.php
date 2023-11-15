@@ -24,9 +24,9 @@ require_once '../app/database/connect.php';//пiдключення до бази
  $text='';$text1='';
 // $db = connectDb($BD); // подключение к базе данных
 //обэднуемо таблицi
-$sql = "SELECT id, pip, 'students' AS type FROM schoolboys WHERE `graduate` IS NULL
+$sql = "SELECT id, name, 'students' AS type FROM students WHERE `graduate` IS NULL
         UNION ALL 
-        SELECT id, pip, 'teachers' AS type FROM teachers";
+        SELECT id, name, 'teachers' AS type FROM teachers";
 
 $stmt = $pdo->prepare($sql);
 // Выполнение запроса
@@ -44,7 +44,7 @@ style='position:absolute;left:530px;top:345px;width:323px;height:28px;z-index:8;
 
     foreach ($s as $item) {
         $id = $item['id'];
-        $pip = $item['pip'];
+        $pip = $item['name'];
         // $dn=$item['dn'];
         // $class_id = $item['id_classes'];
         // $graduate = $item['graduate'];	

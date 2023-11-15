@@ -2,6 +2,11 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/teachers.php'; 
+  // tt($teachers);
+  // exit();
+
+  $teachers=selectAllFromClasssWithTeachersOneIndex('classes' , 'teachers');
   ?>
 
 
@@ -39,26 +44,33 @@ session_start();
 <div class="row title-table">
   <h2>Управление учителями</h2>
   <div class=" col-1">ID</div>
-  <div class=" col-3">ФИО</div>
+  <div class=" col-2">ФИО</div>
   <div class="  col-1">класс</div>
   <div class="del col-2"><a href="">Управление</a></div>
-  <div class="  col-5">Доп. сведения</div>
+  <div class="  col-4">Доп. сведения</div>
+</div>
 
-</div>
+<?php foreach($teachers as $key=>$teacher){ ?>
 <div class="row post">
-  <div class="id col-1">1</div>
-  <div class="id col-3"><a href="">Иванов Иван Иванович</a></div>
-  <div class="title  col-1">1-А </div>
-  <div class="del col-2"><a href="">delete</a></div>
-  <div class="title  col-5"><a href="">>>>></a></div>
+  <div class="id col-1"><?=$teacher['id'] ?></div>
+  <div class="id col-2"><a href=""><?=$teacher['name'] ?></a></div>
+  <div class="title  col-1"><?= $teacher['number'].'-'.$teacher['letter'] ?></div>
+  <div class="del col-1"><a href="edit.php?id=<?=$teacher['id']?>">edit</a></div>
+  <div class="del col-2"><a href="index.php?id_delete=<?=$teacher['id']?>">delete</a></div>
+  <div class="title  col-4"><a href="info.php?id_inf=<?=$teacher['id']?>">>>>></a></div>
 </div>
-<div class="row post">
+<?php } ?>
+
+
+
+<!-- <div class="row post">
   <div class="id col-1">1</div>
-  <div class="id col-3"><a href=''>Петров Петр Петрович</a></div>
+  <div class="id col-2"><a href=''>Петров Петр Петрович</a></div>
   <div class="title  col-1">1-Б</div>
+  <div class="del col-1"><a href="">edit</a></div>
   <div class="del col-2"><a href="">delete</a></div>
-  <div class="title  col-5"><a href="">>>>></a></div>
-</div>
+  <div class="title  col-4"><a href="">>>>></a></div>
+</div> -->
 </div>
 </div>
 

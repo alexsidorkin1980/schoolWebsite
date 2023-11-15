@@ -2,6 +2,8 @@
 session_start();
 
   require_once '../../path.php'; 
+  require_once '../../app/controllers/students.php';
+  
   ?>
 
 <!doctype html>
@@ -54,37 +56,47 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </div>
 
 <div class="row add-post">
- <form action="creat.php" method='post'>
+
+<div class="mb-12 col-12 col-md-12 err"><p>
+<?php require_once '../../app/helps/errorInfo.php'; ?>
+</p></div>
+ <form action="create.php" method='post'>
 
  <div class="col">
         <label for="formGroupExampleInput" class="form-label">ФИО</label>
-        <input name="login" value="<?//=$login;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите фамилию имя отчество ...">
+        <input name="name" value="<?//=$name;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите фамилию имя отчество ...">
       </div>
       <div class="w-100"></div>
       <div class="col">
     <div class="col">
-      <label for="exampleInputPassword1" class="form-label">Класс</label>
-      <input name="pass-first" type="text" class="form-control" id="exampleInputPassword1"placeholder="Введите класс...">
+      <label for="exampleInputPassword1" class="form-label">Дата рождения</label>
+      <input name="dateOfBirth" type="date" value="<?//=$dateOfBirth;?>" class="form-control" id="exampleInputPassword1"placeholder="Введите дату рождения...">
     </div>
+    <div class="col">
+    <label for="exampleInputPassword1" class="form-label">Класс</label>
+    
+     <?php require_once '../../app/helps/combobox.php';  ?>
+    
+     </div>
     <div class="w-100"></div>
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <label for="exampleInputEmail1" class="form-label">Почта</label>
       <input name="email" value="<?//=$email;?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="Введите вашу почту...">
       <div id="emailHelp" class="form-text"></div>
     </div>
     <div class="w-100"></div>
     <div class="col">
       <label for="exampleInputPassword1" class="form-label">Адрес</label>
-      <input name="pass-first" type="text" class="form-control" id="exampleInputPassword1"placeholder="Введите домашний адрес...">
+      <input name="address" value="<?//=$address;?>" type="text" class="form-control" id="exampleInputPassword1"placeholder="Введите домашний адрес...">
     </div>
     <div class="w-100"></div>
     <div class="col">
       <label for="exampleInputPassword1" class="form-label">Телефон</label>
-      <input name="pass-first" type="tel" class="form-control" id="exampleInputPassword1"placeholder="Введите номер телефона...">
+      <input name="phon_number" value="<?//=$phon_number;?>" type="tel" class="form-control" id="exampleInputPassword1"placeholder="Введите номер телефона...">
     </div>
     <div class="w-100"></div>
 
 <div class="col">
-    <button class="btn btn-primary" type="submit">Создать</button>
+    <button class="btn btn-primary" name="create_student" type="submit">Создать</button>
   </div>
   
  </form>

@@ -43,7 +43,9 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
   <div class="container reg_form"> 
   <form class="row justify-content-center" method="post" action="#">
     <h2 col-12>Авторизация</h2>
-    <div class="mb-3 col-12 col-md-4 err"><p><?=$errMsg;?></p></div>
+    <div class="mb-12 col-12 col-md-12 err"><p>
+<?php require_once 'app/helps/errorInfo.php'; ?>
+</p></div>
     <div class="w-100"></div>
     <div class="mb-3 col-12 col-md-4">
         <label for="formGroupExampleInput" class="form-label">Ваша почта(при регистрации)</label>

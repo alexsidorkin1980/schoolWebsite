@@ -23,7 +23,7 @@ function dbCheckError($query){
 
 // запрос на прлучение данных с одной таблицы
 
-function selectAll($table,$params=[],$orderBy = ''){
+function selectAllQuery($table,$params=[],$orderBy = ''){
     global $pdo;
 $sql="SELECT * FROM $table ";
 
@@ -110,6 +110,29 @@ return $query->fetchAll();
 //     return $query->fetchAll();
 // }
 
+function selectAll($table,$params=[]){
+    global $pdo;
+$sql="SELECT * FROM $table ";
+if(!empty($params)){
+   $i=0;
+   foreach($params as $key=>$value){
+if(!is_numeric($value)){
+    $value="'".$value."'";
+}
+ if($i===0){
+$sql=$sql." WHERE $key=$value";
+}
+else{
+     $sql=$sql." AND $key=$value";
+ }
+ $i++;
+   }
+}
+$query=$pdo->prepare($sql);
+$query->execute();
+dbCheckError($query);
+return $query->fetchAll();
+}
 
 
 // запрос на получение одной строки с выбранной таблицы
@@ -263,23 +286,131 @@ function selectAllFromPostsWithUsers($table1,$table2){
 }
 
 
-// $arrData=[
-//     'admin'=>'1',
-//     'username'=>'bubka-krummsa',
-//     'email'=>'ljbubajm@com.ua',
-//     'password'=>'rrrrrrrrr',
-//     'created'=>'2022-08-24 20:17:08'
-// ];
 
-// $params=[
-//     'id'=>'9',
-//     'admin'=>'0',
-//      'email'=>'sanyok1234@rambler.r4u',
-//      'username'=>'alexandr-soikl',
-// ];
+function selectAllFromPostsWithUsersOneIndex($table1,$table2, $limit , $offset){
+    global $pdo;
 
-// tt(selectOne('users',$params));
-// tt(selectAll('users',$params));
- //insert('users',$arrData);
- //update('users',2,$arrData);
- //deletes ('users', 6);
+    $sql="SELECT p.*, u.username
+    FROM $table1 AS P
+    JOIN $table2 AS u
+    ON p.id_user=u.id
+    WHERE p.status=1
+    LIMIT $limit 
+    OFFSET $offset"; 
+
+    $query=$pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);  
+    return $query->fetchAll();
+
+}
+
+
+// выборка записей (post ) с автором на главную
+function selectTopTopicFromPostsOneIndex($table1){
+    global $pdo;
+
+    $sql="SELECT *
+    FROM $table1
+    WHERE id_topic = 16 "; 
+    $query=$pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);  
+    return $query->fetchAll();
+
+}
+
+// поиск по заголовкам и содержимому (простой)
+function searchInTitleAndContent($text,$table1,$table2){
+    global $pdo;
+    $text=trim(strip_tags(stripcslashes(htmlspecialchars($text))));
+    $sql="SELECT p.*, u.username
+    FROM $table1 AS P
+    JOIN $table2 AS u
+    ON p.id_user=u.id
+    WHERE p.status=1
+    AND p.title LIKE '%$text%'
+    OR p.content LIKE '%$text%'"; 
+
+    $query=$pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);  
+    return $query->fetchAll();
+
+}
+
+//
+function selectAllFromClassesWithTeachersOneIndex($table1,$table2){
+    global $pdo;
+    $sql="SELECT p.*, u.name
+    FROM $table1 AS p
+    LEFT JOIN $table2 AS u ON p.id = u.class_id
+    UNION 
+    SELECT p.*, u.name
+    FROM $table1 AS p
+    RIGHT JOIN $table2 AS u ON p.id = u.class_id;";
+    $query=$pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);  
+    return $query->fetchAll();
+
+}
+
+
+function selectAllFromClasssWithStudentsOneIndex($table1,$table2){
+    global $pdo;
+
+    $sql="SELECT p.number,p.letter, u.*
+    FROM $table1 AS P
+    JOIN $table2 AS u
+    ON p.id=u.class_id"; 
+
+    $query=$pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);  
+    return $query->fetchAll();
+
+}
+function selectAllFromClasssWithTeachersOneIndex($table1,$table2){
+    global $pdo;
+
+    $sql="SELECT p.number,p.letter, u.*
+    FROM $table1 AS P
+    JOIN $table2 AS u
+    ON p.id=u.class_id"; 
+
+    $query=$pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);  
+    return $query->fetchAll();
+
+}
+
+function selectPostFromPostsWithUsersOneSingle($table1,$table2,$id){
+    global $pdo;
+
+    $sql="SELECT p.*, u.username
+    FROM $table1 AS P
+    JOIN $table2 AS u
+    ON p.id_user=u.id
+    WHERE p.id=$id"; 
+
+    $query=$pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);  
+    return $query->fetch();
+
+}
+// выборка записи (post ) с автором для single
+function countRow($table){
+    global $pdo;
+
+    $sql="SELECT COUNT(*)
+    FROM $table WHERE status = 1"; 
+
+    $query=$pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);  
+    return $query->fetchColumn();
+
+}

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../app/database/db.php';
 
 if (!$_SESSION) {
-  header('location: ' . BASE_URL . 'log.php');
+  header('location: ' . BASE_URL . 'login.php');
 }
 $errMsg = [];
 $id = '';
@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])) {
       'title' => $title,
       'content' => $content,
       'status' => $publish,
+      'img' => $img,
       'id_topic' => $topic,
     ];
     $post = insert('posts', $post);
@@ -76,6 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_post'])) {
   } else if (mb_strlen($title, 'UTF8') < 2) { // проверка на количество символов логина
     array_push($errMsg, "Логин должен быть больше 2-х символов!!!");
   } else {
+
+    if (!empty($img)) {
     $contents = [
       'id_user' => $_SESSION['id'],
       'title' => $title,
@@ -85,9 +88,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_post'])) {
       'id_topic' => $topic,
     ];
 
-    if (!empty($img)) {
+   
       update('posts', $id, $contents);
       header('location: ../../admin/posts/index.php ');
+    }else{
+
+      $contents = [
+        'id_user' => $_SESSION['id'],
+        'title' => $title,
+        'content' => $content,
+        'status' => $publish,
+        'id_topic' => $topic,
+      ];
+  
+     
+        update('posts', $id, $contents);
+        header('location: ../../admin/posts/index.php ');
+
+
+
     }
   }
 }
@@ -97,6 +116,7 @@ else{
   $publish=isset($_POST['publish'])  ? 1:0;;
 
   }
+  
 // изменение publish
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_pub'])) {
 

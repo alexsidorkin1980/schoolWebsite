@@ -56,7 +56,7 @@ integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLAS
 </div>
 
 <div class="row add-post">
-<div class="mb-12 col-12 col-md-12 err">
+<div class="mb-12 col-12 col-md-12 err"><p>
 <?php require_once '../../app/helps/errorInfo.php'; ?>
 </p></div>
 
