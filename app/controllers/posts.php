@@ -45,11 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])) {
   }
 } else {
   // сохранение значений инпутов 
-  $id='';
-  $title='';
-  $content='';
-  $publish='';
-  $topic='';
+  $id = '';
+  $title = '';
+  $content = '';
+  $publish = '';
+  $topic = '';
 }
 
 // перенос id через форму
@@ -79,19 +79,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_post'])) {
   } else {
 
     if (!empty($img)) {
-    $contents = [
-      'id_user' => $_SESSION['id'],
-      'title' => $title,
-      'content' => $content,
-      'img' => $img,
-      'status' => $publish,
-      'id_topic' => $topic,
-    ];
+      $contents = [
+        'id_user' => $_SESSION['id'],
+        'title' => $title,
+        'content' => $content,
+        'img' => $img,
+        'status' => $publish,
+        'id_topic' => $topic,
+      ];
 
-   
+
       update('posts', $id, $contents);
       header('location: ../../admin/posts/index.php ');
-    }else{
+    } else {
 
       $contents = [
         'id_user' => $_SESSION['id'],
@@ -100,23 +100,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_post'])) {
         'status' => $publish,
         'id_topic' => $topic,
       ];
-  
-     
-        update('posts', $id, $contents);
-        header('location: ../../admin/posts/index.php ');
+
+
+      update('posts', $id, $contents);
+      header('location: ../../admin/posts/index.php ');
 
 
 
     }
   }
-}
-else{
+} else {
   // сохранение значений инпутов логин и имейл
 
-  $publish=isset($_POST['publish'])  ? 1:0;;
+  $publish = isset($_POST['publish']) ? 1 : 0;
+  ;
 
-  }
-  
+}
+
 // изменение publish
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_pub'])) {
 

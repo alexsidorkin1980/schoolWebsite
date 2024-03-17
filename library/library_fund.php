@@ -1,4 +1,7 @@
+<?php 
 
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,7 +17,7 @@
   
    </head>
   <body>
-  <?php require_once '../app\include\access-check.php';?>
+  <?php // require_once '../app\include\access-check.php';?>
    <!-- header  -->
    <?php require_once '../app/include/header.php';?>
 <!-- header end -->
@@ -111,152 +114,152 @@ require_once '../app/database/connect.php';//пiдключення до бази
  $n=1;
 
 // do{
-  $sql = "SELECT * FROM `library` ";
-// подготовка запроса
-$stmt = $pdo->prepare($sql);
- // Выполнение запроса
- $stmt->execute();
- // проверка на ошибки
- dbCheckError($stmt);
- // Получение результата
- $s = $stmt->fetchAll();
+//   $sql = "SELECT * FROM `library` ";
+// // подготовка запроса
+// $stmt = $pdo->prepare($sql);
+//  // Выполнение запроса
+//  $stmt->execute();
+//  // проверка на ошибки
+//  dbCheckError($stmt);
+//  // Получение результата
+//  $book = $stmt->fetch();
+// //  tte($book);
+$book= selectOne('library');
+//   foreach ($s as $item) {
 
-
-  foreach ($s as $item) {
-
-    $id = $item['id'];
-    $inv_number = $item['inv_number'];
-    $name_book = $item['name_book'];
-    $id_schoolboys = $item['id_schoolboys'];
-    $id_teachers = $item['id_teachers'];
-    $return_date = $item['return_date'];
-    $borrow_date = $item['borrow_date'];
+    $id = $book['id'];
+    $inv_number = $book['inv_number'];
+    $name_book = $book['title'];
+    $id_schoolboys = $book['id_schoolboys'];
+    $id_teachers = $book['id_teachers'];
+    $return_date = $book['return_date'];
+    $borrow_date = $book['borrow_date'];
     
 
 
-  if(!empty($id_schoolboys)&&empty($id_teachers)){
-    $sql_boy = "SELECT * FROM `students` WHERE `id`='$id_schoolboys'";
-    // подготовка запроса
-     $stmt = $pdo->prepare($sql_boy);
-    // Выполнение запроса
-     $stmt->execute();
-    // проверка на ошибки
-    dbCheckError($stmt);
-    // Получение результата
-    $sb = $stmt->fetch();
+//   if(!empty($id_schoolboys)&&empty($id_teachers)){
+//     $sql_boy = "SELECT * FROM `students` WHERE `id`='$id_schoolboys'";
+//     // подготовка запроса
+//      $stmt = $pdo->prepare($sql_boy);
+//     // Выполнение запроса
+//      $stmt->execute();
+//     // проверка на ошибки
+//     dbCheckError($stmt);
+//     // Получение результата
+//     $sb = $stmt->fetch();
 
-    // $item = $sb[0];
-    $id = $sb['id'];
+//     // $item = $sb[0];
+//     $id = $sb['id'];
     
-    $name=$sb['name'].' (student)';
-    // $dn = $item['dn'];
-    // $id_classes = $item['id_classes'];
-    // $graduate = $item['graduate'];
-    // $name=$st['pip'].' (schoolboys)';
+//     $name=$sb['name'].' (student)';
+//     // $dn = $item['dn'];
+//     // $id_classes = $item['id_classes'];
+//     // $graduate = $item['graduate'];
+//     // $name=$st['pip'].' (schoolboys)';
     
-  }
+//   }
   
-  if(empty($id_schoolboys)&&!empty($id_teachers)){
-    $sql_teach = "SELECT * FROM `teachers` WHERE `id`=' $id_teachers'";
-    // подготовка запроса
-    $stmt = $pdo->prepare($sql_boy);
-    // Выполнение запроса
-    $stmt->execute();
-   // проверка на ошибки
-   dbCheckError($stmt);
-   // Получение результата
-    $st = $stmt->fetchAll();
+//   if(empty($id_schoolboys)&&!empty($id_teachers)){
+//     $sql_teach = "SELECT * FROM `teachers` WHERE `id`=' $id_teachers'";
+//     // подготовка запроса
+//     $stmt = $pdo->prepare($sql_boy);
+//     // Выполнение запроса
+//     $stmt->execute();
+//    // проверка на ошибки
+//    dbCheckError($stmt);
+//    // Получение результата
+//     $st = $stmt->fetchAll();
 
-    // $result_teach = mysqli_query($db, $sql_teach);
-    // $st = mysqli_fetch_array($result_teach);
-    // $name=$st['pip'].' (teacher)';
-    $item = $st[0];
-    $id = $item['id'];
+//     // $result_teach = mysqli_query($db, $sql_teach);
+//     // $st = mysqli_fetch_array($result_teach);
+//     // $name=$st['pip'].' (teacher)';
+//     $item = $st[0];
+//     $id = $item['id'];
     
-    $name=$item['name'].' (teacher)';
-  }
+//     $name=$item['name'].' (teacher)';
+//   }
   
-  if(!empty( $return_date)||empty( $return_date)&&empty($borrow_date)){
+//   if(!empty( $return_date)||empty( $return_date)&&empty($borrow_date)){
     
-    $name='Книга в бiблiотецi!';
+//     $name='Книга в бiблiотецi!';
     
-  }
-  $inv = $inv_number; 
+//   }
+//   $inv = $inv_number; 
   
 
-   ?>     
+//    ?>     
    
-   <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">картка книги</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-<?php
-      //получаемо iнв.номер 
-// if (isset($_GET['inv_number'])) {
-//   $inv = $_GET['inv_number'];
+    <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h1 class="modal-title fs-5" id="exampleModalLabel">картка книги</h1>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+ <?php
+//       //получаемо iнв.номер 
+// // if (isset($_GET['inv_number'])) {
+// //   $inv = $_GET['inv_number'];
 
-// $db = connectDb($BD);
-$sql = "SELECT * FROM `library`WHERE `inv_number`= ' $inv ' ";
-// $result = mysqli_query($db, $sql);
-// $s = mysqli_fetch_array($result);
+// // $db = connectDb($BD);
+// $sql = "SELECT * FROM `library`WHERE `inv_number`= ' $inv ' ";
+// // $result = mysqli_query($db, $sql);
+// // $s = mysqli_fetch_array($result);
 
- // подготовка запроса
- $stmt = $pdo->prepare($sql_boy);
- // Выполнение запроса
- $stmt->execute();
-// проверка на ошибки
-dbCheckError($stmt);
-// Получение результата
- $sm = $stmt->fetchAll();
+//  // подготовка запроса
+//  $stmt = $pdo->prepare($sql_boy);
+//  // Выполнение запроса
+//  $stmt->execute();
+// // проверка на ошибки
+// dbCheckError($stmt);
+// // Получение результата
+//  $sm = $stmt->fetchAll();
 
-    $item = $sm[0];
-    $id = $item['id'];
-    // $id_schoolboys = $item['id_schoolboys'];
-    // $id_teachers = $item['id_teachers'];
+//     $item = $sm[0];
+//     $id = $item['id'];
+//     // $id_schoolboys = $item['id_schoolboys'];
+//     // $id_teachers = $item['id_teachers'];
     
     
-//визначаемо учня
-if(!empty($id_schoolboys)&&empty($id_teachers )){
-  $sql_boy = "SELECT * FROM `student` WHERE `id`='$id_schoolboys '";
-  // $result_boy = mysqli_query($db, $sql_boy);
-  // $sb = mysqli_fetch_array($result_boy);
-  // $name=$sb['pip'].' (student)';//додаемо до пiп пояснення учень 
+// //визначаемо учня
+// if(!empty($id_schoolboys)&&empty($id_teachers )){
+//   $sql_boy = "SELECT * FROM `student` WHERE `id`='$id_schoolboys '";
+//   // $result_boy = mysqli_query($db, $sql_boy);
+//   // $sb = mysqli_fetch_array($result_boy);
+//   // $name=$sb['pip'].' (student)';//додаемо до пiп пояснення учень 
 
-  // подготовка запроса
- $stmt = $pdo->prepare($sql_boy);
- // Выполнение запроса
- $stmt->execute();
-// проверка на ошибки
-dbCheckError($stmt);
-// Получение результата
- $sms = $stmt->fetchAll();
- $item = $sms[0];
-    $id = $item['id'];
-  $name=$item['name'].' (schoolboys)';
-}
-//визначаемо учителя
-if(empty($id_schoolboys)&&!empty($id_teachers )){
-  $sql_teach = "SELECT * FROM `teachers` WHERE `id`='$id_teachers'";
-  // $result_teach = mysqli_query($db, $sql_teach);
-  // $st = mysqli_fetch_array($result_teach);
-  // $name=$st['pip'].' (teacher)';//додаемо до пiп пояснення учитель
-  // подготовка запроса
- $stmt = $pdo->prepare($sql_boy);
- // Выполнение запроса
- $stmt->execute();
-// проверка на ошибки
-dbCheckError($stmt);
-// Получение результата
- $sms = $stmt->fetchAll();
- $item = $sts[0];
-    $id = $item['id'];
-  $name=$item['name'].' (teacher)';
-}
+//   // подготовка запроса
+//  $stmt = $pdo->prepare($sql_boy);
+//  // Выполнение запроса
+//  $stmt->execute();
+// // проверка на ошибки
+// dbCheckError($stmt);
+// // Получение результата
+//  $sms = $stmt->fetchAll();
+//  $item = $sms[0];
+//     $id = $item['id'];
+//   $name=$item['name'].' (schoolboys)';
+// }
+// //визначаемо учителя
+// if(empty($id_schoolboys)&&!empty($id_teachers )){
+//   $sql_teach = "SELECT * FROM `teachers` WHERE `id`='$id_teachers'";
+//   // $result_teach = mysqli_query($db, $sql_teach);
+//   // $st = mysqli_fetch_array($result_teach);
+//   // $name=$st['pip'].' (teacher)';//додаемо до пiп пояснення учитель
+//   // подготовка запроса
+//  $stmt = $pdo->prepare($sql_boy);
+//  // Выполнение запроса
+//  $stmt->execute();
+// // проверка на ошибки
+// dbCheckError($stmt);
+// // Получение результата
+//  $sms = $stmt->fetchAll();
+//  $item = $sts[0];
+//     $id = $item['id'];
+//   $name=$item['name'].' (teacher)';
+// }
 ?>
 
  <div style="background-color:grey;border:2px solid black;color:blue;text-align:center;
@@ -265,7 +268,7 @@ dbCheckError($stmt);
   <p style="margin: 50px; "><h1>кому видана: <span><?php if($borrow_date==null)
   echo'Книга в библиотеке!!';
   else
-  echo$name;?></span> </h1></p>
+  echo $name;?></span> </h1></p>
   <p style="margin: 50px; "><h1>дата повернення: <span><?=$return_date;?></span> </h1></p>
 </div> 
 
@@ -307,8 +310,8 @@ dbCheckError($stmt);
 <!-- </span></td> -->
     </tbody>
     <?php
-    $n++;
-    }
+    // $n++;
+    // }
   ?>
   </table>
 

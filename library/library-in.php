@@ -1,4 +1,16 @@
 
+
+
+
+
+
+
+
+
+
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,7 +26,7 @@
 
    </head>
   <body>
-  <?php require_once '../app\include\access-check.php';?>
+  <?php //require_once '../app/include/access-check.php';?>
    <!-- header  -->
    <?php require_once '../app/include/header.php';?>
 <!-- header end -->
