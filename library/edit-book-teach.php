@@ -36,59 +36,61 @@ require_once '../app/controllers/library.php';
   <!-- END HEADER -->
 
   <div class="container">
+
+  <div class="row">
     <!-- sidebar start -->
-    <div class="row">
-      <?php require_once '../app/include/sidebar-librarian.php'; ?>
-      <!-- sidebar end -->
-      <div class="posts col-8">
-        <div class="row title-table">
-          <h2>Добавление книги в библиотеку</h2>
-        </div>
-        <div class="row add-post">
-          <div class="mb-12 col-12 col-md-12 err">
-            <?php require_once '../app/helps/errorInfo.php'; ?>
-            </p>
-          </div>
-          <form action="add-book.php" method='post'>
-            <div class="col">
-              <label for="formGroupExampleInput" class="form-label">Автор</label>
-              <input name="author" value="<?= $author; ?>" type="text" class="form-control" id="formGroupExampleInput"
-                placeholder="Введите автора книги...">
-            </div>
-            <div class="col">
-              <label for="formGroupExampleInput" class="form-label">Название</label>
-              <input name="title" value="<?= $title; ?>" type="text" class="form-control" id="formGroupExampleInput"
-                placeholder="Введите название книги...">
-            </div>
-            <div class="w-100"></div>
-            <div class="col">
-              <label for="exampleInputEmail1" class="form-label">Класс</label>
-              <input name="class" value="<?= $class; ?>" type="number" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp" placeholder="Введите класс...">
-              <div id="emailHelp" class="form-text"></div>
-            </div>
-            <div class="col">
-              <label for="exampleInputEmail1" class="form-label">Инвентаризационный номер</label>
-              <input name="inv_number" value="<?= $inv_number; ?>" type="number" class="form-control"
-                id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите класс...">
-              <div id="emailHelp" class="form-text"></div>
-            </div>
-            <div class="w-100"></div>
-            <div class="col">
-              <label for="exampleInputPassword1" class="form-label">Год издания</label>
-              <input name="date_edition" type="number" class="form-control" id="exampleInputPassword1"
-                placeholder="Введите год издания...">
-            </div>
-            <div class="col">
-              <button class="btn btn-primary" name="create-book" type="submit">Добавить</button>
-            </div>
-          </form>
-        </div>
+    <?php require_once '../app/include/sidebar-librarian.php'; ?>
+    <!-- sidebar end -->
+
+    <div class="posts col-8">
+      <div class="row title-table">
+        <h2>Редактирование книги в библиотеке</h2>
       </div>
-      <?php require_once '../app/include/sidebar-librarian2.php'; ?>
+      <div class="row add-post">
+        <div class="mb-12 col-12 col-md-12 err">
+          <?php require_once '../app/helps/errorInfo.php'; ?>
+          </p>
+        </div>
+        <form action="edit-book-teach.php" method='post'>
+          <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Автор</label>
+            <input name="id" value="<?= $id_book ?>" type="hidden">
+            <input name="author" value="<?= $book['author']; ?>" type="text" class="form-control" id="formGroupExampleInput"
+              placeholder="Введите автора книги...">
+          </div>
+          <div class="col">
+            <label for="formGroupExampleInput" class="form-label">Название</label>
+            <input name="title" value="<?= $book['title']; ?>" type="text" class="form-control" id="formGroupExampleInput"
+              placeholder="Введите название книги...">
+          </div>
+          <div class="w-100"></div>
+          <div class="col">
+            <label for="exampleInputEmail1" class="form-label">Инвентаризационный номер</label>
+            <input name="inv_number" value="<?= $inv_number; ?>" type="number" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" placeholder="Введите инвентаризационный номер..." readonly>
+            <div id="emailHelp" class="form-text"></div>
+          </div>
+         
+          <div class="col">
+            <button class="btn btn-primary" name="edit-book-teach" type="submit">Сохранить</button>
+          </div>
+        </form>
+      </div>
+
+    
     </div>
-</div>
+
+    <?php require_once '../app/include/sidebar-librarian2.php'; ?>
+  </div>
+  </div>
   
+
+  <!-- FOOTER  -->
+
+  <?php
+  require_once '../app/include/footer.php';
+  ?>
+  <!-- FOOTER end -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -140,9 +142,9 @@ require_once '../app/controllers/library.php';
 
    </head>
   <body> -->
-<?php //require_once '../app\include\access-check.php'; ?>
-<!-- header  -->
-<?php // require_once '../app/include/header.php'; ?>
+  <?php //require_once '../app\include\access-check.php';?>
+   <!-- header  -->
+   <?php // require_once '../app/include/header.php';?>
 <!-- header end -->
 <?php
 //require_once '../app/database/connect.php';//пiдключення до бази
@@ -185,11 +187,11 @@ require_once '../app/controllers/library.php';
 <!-- блок main start  -->
 <!-- <div class="container">
     <div class="content row"> -->
-<!-- блок main start  -->
+        <!-- блок main start  -->
 <!-- блок main content    -->
 <!-- <div class="main-conent col-md-9 col-12"> -->
-<!-- блок main content    -->
-<!-- <div class="container">
+        <!-- блок main content    --> 
+   <!-- <div class="container">
      <div class="form-content row"> -->
 <!-- <form action="" method="post"> -->
 
@@ -215,22 +217,26 @@ require_once '../app/controllers/library.php';
 </form> -->
 <!-- </div> -->
 
-<!-- <h1 style='color:red;position:absolute;left:0px;top:549px;';><? //=$text ?></h1> -->
+<!-- <h1 style='color:red;position:absolute;left:0px;top:549px;';><? //=$text?></h1> -->
 
-<!-- </div>
+   <!-- </div>
 </div> -->
 <!-- блок main content end   -->
-<!-- </div> -->
-<!-- блок main content end   -->
-<!-- блок main end  -->
-<!-- </div>
+        <!-- </div> -->
+        <!-- блок main content end   -->
+        <!-- блок main end  -->
+    <!-- </div>
 </div> -->
 <!-- блок main end  -->
 <!-- footer -->
-<?php //require_once '../app/include/footer.php'; ?>
+   <?php //require_once '../app/include/footer.php';?>
 <!-- footer end -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/1d9689321f.js" crossorigin="anonymous"></script>
 
    </body>
 </html> -->
+
+
+
+

@@ -31,6 +31,39 @@ function dbCheckError($query)
 }
 
 
+function combobox($table)
+{
+    global $pdo;
+    //рядок з  запитом до бази
+    $sql = "SELECT * FROM $table ORDER BY `name` ASC";
+    // Подготовка запроса
+    $stmt = $pdo->prepare($sql);
+
+    // Выполнение запроса
+    $stmt->execute();
+
+    // Получение результата
+    $users = $stmt->fetchAll();
+
+    // tte($_POST);
+    ?>
+    <select class="form-select" name='combobox' aria-label="Default select example">
+        <?php foreach ($users as $user) {
+            // tt($user);
+            if (isset($_POST['combobox']) and $_POST['combobox'] == $user['id']) { ?>
+                <option selected value="<?= $user['id'] ?>">
+                    <?= $user['name']; ?>
+                </option>
+            <?php } else { ?>
+                <option value="<?= $user['id'] ?>">
+                    <?= $user['name']; ?>
+                </option>
+            <?php }
+        } ?>
+    </select>
+<?php
+}
+
 // запрос на прлучение данных с одной таблицы
 
 function selectAllQuery($table, $params = [], $orderBy = '')
@@ -73,6 +106,12 @@ function selectAllQuery($table, $params = [], $orderBy = '')
     dbCheckError($query);
     return $query->fetchAll();
 }
+
+
+
+
+
+
 
 function selectAll($table, $params = [])
 {
@@ -373,4 +412,21 @@ function countRow($table)
     dbCheckError($query);
     return $query->fetchColumn();
 
+}
+
+function writeHistory($data, $file)
+{
+    $handle = fopen($file, 'a');
+
+    if ($handle !== false) {
+        if (fwrite($handle, $data) !== false) {
+            echo "Данные успешно записаны в файл.";
+        } else {
+            echo "Произошла ошибка при записи в файл.";
+        }
+
+        fclose($handle);
+    } else {
+        echo "Не удалось открыть файл для записи.";
+    }
 }

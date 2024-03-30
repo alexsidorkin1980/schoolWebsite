@@ -3,6 +3,8 @@ session_start();
 
 require_once '../path.php';
 require_once '../app/controllers/library.php';
+// tt($book['author']);
+
 ?>
 
 <!doctype html>
@@ -36,15 +38,13 @@ require_once '../app/controllers/library.php';
   <!-- END HEADER -->
 
   <div class="container">
+
+  <div class="row">
     <!-- sidebar start -->
     <?php require_once '../app/include/sidebar-librarian.php'; ?>
     <!-- sidebar end -->
+
     <div class="posts col-8">
-      <!-- <div class="button row">
-        <a href="<? //= BASE_URL . "admin/users/create.php" ?>" class="col-2 btn btn-success">Создать</a>
-        <span class="col-1"></span>
-        <a href="<? //= BASE_URL . "admin/users/index.php" ?>" class="col-3 btn btn-warning">Изменить</a>
-      </div> -->
       <div class="row title-table">
         <h2>Редактирование книги в библиотеке</h2>
       </div>
@@ -57,18 +57,18 @@ require_once '../app/controllers/library.php';
           <div class="col">
             <label for="formGroupExampleInput" class="form-label">Автор</label>
             <input name="id" value="<?= $id_book ?>" type="hidden">
-            <input name="author" value="<?= $author; ?>" type="text" class="form-control" id="formGroupExampleInput"
+            <input name="author" value="<?= $book['author']; ?>" type="text" class="form-control" id="formGroupExampleInput"
               placeholder="Введите автора книги...">
           </div>
           <div class="col">
             <label for="formGroupExampleInput" class="form-label">Название</label>
-            <input name="title" value="<?= $title; ?>" type="text" class="form-control" id="formGroupExampleInput"
+            <input name="title" value="<?= $book['title']; ?>" type="text" class="form-control" id="formGroupExampleInput"
               placeholder="Введите название книги...">
           </div>
           <div class="w-100"></div>
           <div class="col">
             <label for="exampleInputEmail1" class="form-label">Класс</label>
-            <input name="class" value="<?= $class; ?>" type="number" class="form-control" id="exampleInputEmail1"
+            <input name="class" value="<?= $book['class']; ?>" type="number" class="form-control" id="exampleInputEmail1"
               aria-describedby="emailHelp" placeholder="Введите класс...">
             <div id="emailHelp" class="form-text"></div>
           </div>
@@ -78,32 +78,20 @@ require_once '../app/controllers/library.php';
               aria-describedby="emailHelp" placeholder="Введите инвентаризационный номер..." readonly>
             <div id="emailHelp" class="form-text"></div>
           </div>
-          <!-- <div class="w-100"></div> -->
-          <!-- <div class="col">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input name="pass-first" type="password" class="form-control" id="exampleInputPassword1"
-              placeholder="Введите ваш пароль...">
-          </div>
-          <div class="w-100"></div>
-          <div class="col">
-            <label for="exampleInputPassword2" class="form-label">Password</label>
-            <input name="pass-second" type="password" class="form-control" id="exampleInputPassword2"
-              placeholder="Введите ваш пароль еще раз...">
-          </div> -->
-          <!-- <div class="form-check">
-            <input name='admin' class="form-check-input" type="checkbox" value="1" id="flexCheckChecked">
-            <label class="form-check-label" for="flexCheckChecked">
-              Admin?
-            </label>
-          </div> -->
+         
           <div class="col">
             <button class="btn btn-primary" name="edit-book" type="submit">Сохранить</button>
           </div>
         </form>
       </div>
+
+    
     </div>
+
+    <?php require_once '../app/include/sidebar-librarian2.php'; ?>
   </div>
   </div>
+  
 
   <!-- FOOTER  -->
 

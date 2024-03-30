@@ -42,14 +42,14 @@ require_once '../app/controllers/library.php';
       <!-- sidebar end -->
       <div class="posts col-8">
         <div class="row title-table">
-          <h2>Добавление книги в библиотеку</h2>
+          <h2>Добавление книги для учителя в библиотеку</h2>
         </div>
         <div class="row add-post">
           <div class="mb-12 col-12 col-md-12 err">
             <?php require_once '../app/helps/errorInfo.php'; ?>
             </p>
           </div>
-          <form action="add-book.php" method='post'>
+          <form action="add-book-teach.php" method='post'>
             <div class="col">
               <label for="formGroupExampleInput" class="form-label">Автор</label>
               <input name="author" value="<?= $author; ?>" type="text" class="form-control" id="formGroupExampleInput"
@@ -61,12 +61,6 @@ require_once '../app/controllers/library.php';
                 placeholder="Введите название книги...">
             </div>
             <div class="w-100"></div>
-            <div class="col">
-              <label for="exampleInputEmail1" class="form-label">Класс</label>
-              <input name="class" value="<?= $class; ?>" type="number" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp" placeholder="Введите класс...">
-              <div id="emailHelp" class="form-text"></div>
-            </div>
             <div class="col">
               <label for="exampleInputEmail1" class="form-label">Инвентаризационный номер</label>
               <input name="inv_number" value="<?= $inv_number; ?>" type="number" class="form-control"
@@ -80,14 +74,14 @@ require_once '../app/controllers/library.php';
                 placeholder="Введите год издания...">
             </div>
             <div class="col">
-              <button class="btn btn-primary" name="create-book" type="submit">Добавить</button>
+              <button class="btn btn-primary" name="create-book-teach" type="submit">Добавить</button>
             </div>
           </form>
         </div>
       </div>
       <?php require_once '../app/include/sidebar-librarian2.php'; ?>
     </div>
-</div>
+  </div>
   
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

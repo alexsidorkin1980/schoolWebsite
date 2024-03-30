@@ -4,8 +4,13 @@ require_once '../app/database/db.php';
 require_once '../path.php';
 require_once '../app/controllers/library.php';
 $class=isset($_GET['class']) ? $_GET['class'] : '';
-$classes = selectAll('library', ['class' => $class]);
-//   tt($classes);
+$classes = selectAll('library', ['class' => $class , 'status'=> 'available']);
+
+// tte($classes);
+//$book = selectOne('account_books', ['id_book' => $_GET['id_book']]);
+//   tt($book);
+//$student=selectOne('students', ['id'=> $book['id_student']]);
+// tt($student);
 ?>
 
 <!doctype html>
@@ -27,7 +32,13 @@ $classes = selectAll('library', ['class' => $class]);
    <!-- header end -->
 
 
-
+<!-- <div class="col-10"> -->
+<div class="button row">
+            <a href="<?=  BASE_URL . "library/add-book.php" ?>" class="col-2 btn btn-success">Добавить книгу</a>
+            <!-- <span class="col-1"></span>
+            <a href="<? //=BASE_URL . "admin/users/index.php" ?>" class="col-3 btn btn-warning">Изменить</a> -->
+         </div>
+         <!-- </div> -->
 
 <div class="container ">
 
@@ -40,31 +51,27 @@ $classes = selectAll('library', ['class' => $class]);
 
       
 
-      <div class=" col-10">
-         <div class="button row">
-            <a href="<?=  BASE_URL . "library/add-book.php" ?>" class="col-2 btn btn-success">Добавить</a>
-            <span class="col-1"></span>
-            <a href="<? //=BASE_URL . "admin/users/index.php" ?>" class="col-3 btn btn-warning">Изменить</a>
-         </div>
+      
 
 
 
 
-<div class=" col-md-10">
+      <div class=" col-md-8">
 
          <div class="accordion" id="tasks-accordion">
         <?php 
         // tte($tasks);
-        foreach ($classes as $oneTask): 
-            //  tte($task);
+        foreach ($classes as $key=>$oneTask): 
+            //   tte($oneTask['id']);
             ?>              
          <div class="accordion-item mb-2">
 
                <div class="accordion-header d-flex justify-content-between align-items-center row" id="task-<?php echo $oneTask['id']; ?>">
                     <h2 class="accordion-header col-12 col-md-12">
-                        <button style="background-color: <? //=$priorityColor?>;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#task-collapse-<?php echo $oneTask['id']; ?>"
+                        <button name ='button<?php echo $oneTask['id']; ?>' style="background-color: <? //=$priorityColor?>;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#task-collapse-<?php echo $oneTask['id']; ?>"
                          aria-expanded="false" aria-controls="task-collapse-<?php echo $oneTask['id']; ?>" data-priority="<?php //echo $oneTask['priority']; ?>"> 
-                            <span class="col-12 col-md-5"><i class="fa-solid fa-square-up-right"></i> <strong><?php echo $oneTask['title']; ?> </strong></span>
+                          <strong><?php echo $key + 1 ?> </strong>
+                            <span class="col-12 col-md-5"> .<strong><?php echo $oneTask['title']; ?> </strong></span>
                             <!-- <span class="col-5 col-md-3"><i class="fa-solid fa-person-circle-question"></i> <?php //echo $oneTask['status']; ?> </span>
                             <span class="col-5 col-md-3"><i class="fa-solid fa-hourglass-start"></i><span class="due-date"><?php //echo $oneTask['finish_date']; ?></span></span> -->
                         </button>
@@ -80,19 +87,22 @@ $classes = selectAll('library', ['class' => $class]);
                             <span class="col-12 col-md-6"><strong><i class="fa-solid fa-battery-three-quarters"></i> Инвентаризационный номер:</strong> <?php echo htmlspecialchars($oneTask['inv_number']); ?></span>
                         </p>
                         <p class="row">
-                            <span class="col-12 col-md-6"><strong><i class="fa-solid fa-person-circle-question"></i> Дата издания:</strong> <?php echo htmlspecialchars($oneTask['date_edition']); ?></span>
-                            <span class="col-12 col-md-6"><strong><i class="fa-solid fa-hourglass-start"></i> Дата выдачи:</strong> <?php //echo htmlspecialchars($oneTask['finish_date']); ?></span>
+                            <span class="col-12 col-md-6"><strong><i class="fa-solid fa-person-circle-question"></i> Дата издания:</strong> 
+                            <?= isset($oneTask['date_edition']) ? htmlspecialchars($oneTask['date_edition']) : ''; ?></span>
+                            <!-- <span class="col-12 col-md-6"><strong><i class="fa-solid fa-hourglass-start"></i> Дата выдачи:</strong> <?php isset($book['borrow_date']) ? htmlspecialchars($book['borrow_date']) : '';  ?></span> -->
                         </p>
                         
                         <p class="row">
-                            <span class="col-12 col-md-6"><strong><i class="fa-solid fa-person-circle-question"></i>  Дата возврата:</strong> <?php //echo htmlspecialchars($oneTask['priority']); ?></span>
-                            <span class="col-12 col-md-6"><strong><i class="fa-solid fa-hourglass-start"></i>  У кого:</strong> <?php //echo htmlspecialchars($oneTask['finish_date']); ?></span>
+                            <!-- <span class="col-12 col-md-6"><strong><i class="fa-solid fa-person-circle-question"></i>  Дата возврата:</strong> <?php  isset($book['return_date']) ? htmlspecialchars($book['return_date']) : ''; ?></span> -->
+                            <!-- <span class="col-12 col-md-6"><strong><i class="fa-solid fa-hourglass-start"></i>  У кого:</strong> <?php echo htmlspecialchars($student['name']); ?></span> -->
                         </p>
                         <hr>
 
                     <div class="d-flex justify-content-start action-task">
-                            <a href="/todo/tasks/edit/<?php //echo $oneTask['id']; ?>" class="btn btn-primary me-2">Edit</a>
-                            <a href="/todo/tasks/delete/<?php //echo $oneTask['id']; ?>" class="btn btn-danger me-2">Delete</a>
+                            <a href="/library/book-out.php?id=<?php echo $oneTask['id']; ?>&class=<?php echo $oneTask['class']; ?>" class="btn btn-primary me-2">Выдать</a>
+                            <!-- <a href="/library/edit.php?id=<?php //echo $oneTask['id']; ?>" class="btn btn-primary me-2">Вернуть</a> -->
+                            <a href="/library/edit.php?id_book=<?php echo $oneTask['id']; ?>" class="btn btn-primary me-2">Edit</a>
+                            <a href="index.php?book_delete=<?php echo $oneTask['id']; ?>&class=<?php echo $oneTask['class']; ?>" class="btn btn-danger me-2">Delete</a>
                      </div>
                   </div>
             </div>
@@ -100,28 +110,29 @@ $classes = selectAll('library', ['class' => $class]);
 
       </div>
         
-                            <?php endforeach; ?>
+           <?php endforeach; ?>
          </div>
 
 </div>
 
 
 
-
+<?php require_once '../app/include/sidebar-librarian2.php'; ?>
 
 
    </div>
 
 
-
+   
 
 </div>
 
 
 
 
+
         <!-- footer -->
-   <?php //require_once '../app/include/footer.php'; ?>
+   <?php // require_once '../app/include/footer.php'; ?>
    <!-- footer end -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
